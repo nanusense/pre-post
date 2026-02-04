@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String?
+  credits       Int       @default(0)
+  suspended     Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+
+  sentMessages      Message[] @relation("SentMessages")
+  receivedMessages  Message[] @relation("ReceivedMessages")
+  magicLinks        MagicLink[]
+}
+
+model Message {
+  id              String    @id @default(uuid())
+  senderId        String
+  recipientEmail  String
+  recipientName   String
+  recipientId     String?
+  content         String
+  isRead          Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  readAt          DateTime?
+
+  sender    User  @relation("SentMessages", fields: [senderId], references: [id])
+  recipient User? @relation("ReceivedMessages", fields: [recipientId], references: [id])
+
+  @@unique([senderId, recipientEmail])
+}
+
+model MagicLink {
+  id        String    @id @default(uuid())
+  email     String
+  token     String    @unique
+  expiresAt DateTime
+  used      Boolean   @default(false)
+  userId    String?
+
+  user      User?     @relation(fields: [userId], references: [id])
+}
