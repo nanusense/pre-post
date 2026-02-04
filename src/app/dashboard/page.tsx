@@ -48,8 +48,8 @@ export default async function DashboardPage() {
           </p>
         </Link>
 
-        {/* Inbox cards */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
+        {/* Stats cards */}
+        <div className="grid grid-cols-3 gap-4">
           <Link
             href="/inbox"
             className="p-5 border border-gray-200 rounded-lg hover:border-gray-300"
@@ -65,12 +65,12 @@ export default async function DashboardPage() {
             <p className="text-3xl font-semibold">{readCount}</p>
             <p className="text-sm text-gray-500 mt-1">Read</p>
           </Link>
-        </div>
 
-        {/* Stats */}
-        <p className="text-sm text-gray-500">
-          You&apos;ve written {sentCount} message{sentCount !== 1 ? 's' : ''}
-        </p>
+          <div className="p-5 border border-gray-200 rounded-lg">
+            <p className="text-3xl font-semibold">{sentCount}</p>
+            <p className="text-sm text-gray-500 mt-1">Sent</p>
+          </div>
+        </div>
       </main>
     </>
   )
