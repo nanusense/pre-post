@@ -229,7 +229,7 @@ export default function MessagePage() {
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
             <h2 className="text-lg font-semibold mb-4">Report this message</h2>
             <p className="text-sm text-gray-600 mb-4">
-              Please describe why you&apos;re reporting this message. An admin will review it.
+              Please describe why you&apos;re reporting this message. An admin will review it and see the full message content.
             </p>
             <textarea
               value={reportReason}
