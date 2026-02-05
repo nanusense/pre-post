@@ -23,7 +23,7 @@ export default async function WritePage() {
 
         <h1 className="text-2xl font-semibold mb-2">Write a message</h1>
         <p className="text-gray-600 mb-8">
-          Send an anonymous, heartfelt message to someone you care about.
+          Send an anonymous message to someone you care about.
           You&apos;ll earn 1 credit when you send it.
         </p>
 

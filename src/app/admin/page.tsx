@@ -25,16 +25,38 @@ interface Message {
   sender: { email: string }
 }
 
+interface Report {
+  id: string
+  reason: string
+  createdAt: string
+  message: {
+    id: string
+    content: string
+    recipientName: string
+    recipientEmail: string
+    sender: {
+      id: string
+      email: string
+      suspended: boolean
+    }
+  }
+  reporter: {
+    email: string
+  }
+}
+
 interface Stats {
   users: number
   messages: number
   unreadMessages: number
+  pendingReports: number
 }
 
 interface AdminData {
   stats: Stats
   recentUsers: User[]
   recentMessages: Message[]
+  pendingReports: Report[]
 }
 
 export default function AdminPage() {
@@ -70,26 +92,23 @@ export default function AdminPage() {
     fetchData()
   }, [fetchData])
 
-  async function handleSuspend(userId: string, suspend: boolean) {
-    setActionLoading(userId)
+  async function handleAction(action: string, params: Record<string, string>) {
+    const key = params.userId || params.reportId || ''
+    setActionLoading(key)
     try {
       const res = await fetch('/api/admin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: suspend ? 'suspend' : 'unsuspend',
-          userId,
-        }),
+        body: JSON.stringify({ action, ...params }),
       })
 
       if (!res.ok) {
         throw new Error('Action failed')
       }
 
-      // Refresh data
       await fetchData()
     } catch {
-      setError('Failed to update user')
+      setError('Failed to perform action')
     } finally {
       setActionLoading(null)
     }
@@ -123,7 +142,7 @@ export default function AdminPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-4 gap-4 mb-8">
         <div className="p-4 border border-gray-200 rounded-lg">
           <p className="text-sm text-gray-500">Total Users</p>
           <p className="text-2xl font-semibold">{data.stats.users}</p>
@@ -136,7 +155,70 @@ export default function AdminPage() {
           <p className="text-sm text-gray-500">Unread Messages</p>
           <p className="text-2xl font-semibold">{data.stats.unreadMessages}</p>
         </div>
+        <div className="p-4 border border-gray-200 rounded-lg">
+          <p className="text-sm text-gray-500">Pending Reports</p>
+          <p className="text-2xl font-semibold text-red-600">{data.stats.pendingReports}</p>
+        </div>
       </div>
+
+      {/* Pending Reports */}
+      {data.pendingReports.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-lg font-semibold mb-4 text-red-600">Pending Reports</h2>
+          <div className="space-y-4">
+            {data.pendingReports.map((report) => (
+              <div key={report.id} className="border border-red-200 rounded-lg p-4 bg-red-50">
+                <div className="flex justify-between items-start mb-3">
+                  <div>
+                    <p className="text-sm text-gray-500">
+                      Reported by: <span className="font-medium text-gray-700">{report.reporter.email}</span>
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Sender: <span className="font-medium text-gray-700">{report.message.sender.email}</span>
+                      {report.message.sender.suspended && (
+                        <span className="ml-2 text-red-600">(Already suspended)</span>
+                      )}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {new Date(report.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    {!report.message.sender.suspended && (
+                      <button
+                        onClick={() => handleAction('suspend-from-report', { reportId: report.id })}
+                        disabled={actionLoading === report.id}
+                        className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 disabled:opacity-50"
+                      >
+                        {actionLoading === report.id ? '...' : 'Suspend Sender'}
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleAction('dismiss-report', { reportId: report.id })}
+                      disabled={actionLoading === report.id}
+                      className="px-3 py-1 border border-gray-300 text-sm rounded hover:bg-gray-100 disabled:opacity-50"
+                    >
+                      Dismiss
+                    </button>
+                  </div>
+                </div>
+                <div className="mb-3">
+                  <p className="text-sm font-medium text-gray-700 mb-1">Reason:</p>
+                  <p className="text-sm text-gray-600 bg-white p-2 rounded">{report.reason}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-700 mb-1">
+                    Message to {report.message.recipientName} ({report.message.recipientEmail}):
+                  </p>
+                  <p className="text-sm text-gray-600 bg-white p-2 rounded whitespace-pre-wrap">
+                    {report.message.content}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Recent Users */}
       <section className="mb-8">
@@ -181,7 +263,7 @@ export default function AdminPage() {
                   </td>
                   <td className="px-4 py-3 text-sm">
                     <button
-                      onClick={() => handleSuspend(user.id, !user.suspended)}
+                      onClick={() => handleAction(user.suspended ? 'unsuspend' : 'suspend', { userId: user.id })}
                       disabled={actionLoading === user.id}
                       className="text-sm text-blue-600 hover:text-blue-800 disabled:opacity-50"
                     >

@@ -20,7 +20,7 @@ export async function GET(
       where: { id },
     })
 
-    if (!message) {
+    if (!message || message.isDeleted) {
       return NextResponse.json({ error: 'Message not found' }, { status: 404 })
     }
 
@@ -56,6 +56,48 @@ export async function GET(
     return NextResponse.json({ message: updatedMessage, creditSpent: true })
   } catch (error) {
     console.error('Read message error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const user = await getCurrentUser()
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { id } = await params
+
+    const message = await db.message.findUnique({
+      where: { id },
+    })
+
+    if (!message) {
+      return NextResponse.json({ error: 'Message not found' }, { status: 404 })
+    }
+
+    // Only recipient can delete
+    if (message.recipientId !== user.id) {
+      return NextResponse.json({ error: 'You can only delete messages sent to you' }, { status: 403 })
+    }
+
+    // Soft delete - keep for admin review
+    await db.message.update({
+      where: { id },
+      data: {
+        isDeleted: true,
+        deletedAt: new Date(),
+      },
+    })
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Delete message error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

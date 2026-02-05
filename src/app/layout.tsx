@@ -10,7 +10,7 @@ const geistSans = localFont({
 
 export const metadata: Metadata = {
   title: 'Pre-Post - Write what you\'ve never said',
-  description: 'Send anonymous, heartfelt messages to people you care about. Pay it forward by writing before you read.',
+  description: 'Send anonymous, meaningful messages to people you care about. Pay it forward by writing before you read.',
 }
 
 export const viewport: Viewport = {

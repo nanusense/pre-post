@@ -21,6 +21,11 @@ export default function MessagePage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [needsCredits, setNeedsCredits] = useState(false)
+  const [showReportModal, setShowReportModal] = useState(false)
+  const [reportReason, setReportReason] = useState('')
+  const [reporting, setReporting] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const [reported, setReported] = useState(false)
 
   const fetchMessage = useCallback(async () => {
     if (!messageId) return
@@ -55,6 +60,56 @@ export default function MessagePage() {
     fetchMessage()
   }, [fetchMessage])
 
+  async function handleReport() {
+    if (!reportReason.trim()) return
+
+    setReporting(true)
+    try {
+      const res = await fetch('/api/reports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messageId, reason: reportReason }),
+      })
+
+      if (res.ok) {
+        setReported(true)
+        setShowReportModal(false)
+        setReportReason('')
+      } else {
+        const data = await res.json()
+        alert(data.error || 'Failed to report')
+      }
+    } catch {
+      alert('Failed to report')
+    } finally {
+      setReporting(false)
+    }
+  }
+
+  async function handleDelete() {
+    if (!confirm('Are you sure you want to delete this message? This cannot be undone.')) {
+      return
+    }
+
+    setDeleting(true)
+    try {
+      const res = await fetch(`/api/messages/${messageId}`, {
+        method: 'DELETE',
+      })
+
+      if (res.ok) {
+        router.push('/inbox')
+      } else {
+        const data = await res.json()
+        alert(data.error || 'Failed to delete')
+      }
+    } catch {
+      alert('Failed to delete')
+    } finally {
+      setDeleting(false)
+    }
+  }
+
   if (loading) {
     return (
       <main className="min-h-screen flex items-center justify-center">
@@ -75,7 +130,7 @@ export default function MessagePage() {
         <div className="text-center py-12">
           <h1 className="text-2xl font-semibold mb-4">You need a credit to read this</h1>
           <p className="text-gray-600 mb-6">
-            Write a heartfelt message to someone you care about to earn a credit.
+            Write a message to someone you care about to earn a credit.
           </p>
           <Link
             href="/write"
@@ -139,6 +194,24 @@ export default function MessagePage() {
         <p className="text-sm text-gray-500 mb-4">
           This message was written anonymously. You will never know who sent it.
         </p>
+
+        <div className="flex items-center gap-4 mb-6">
+          <button
+            onClick={() => setShowReportModal(true)}
+            disabled={reported}
+            className="text-sm text-red-600 hover:text-red-800 disabled:text-gray-400"
+          >
+            {reported ? 'Reported' : 'Report abuse'}
+          </button>
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className="text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50"
+          >
+            {deleting ? 'Deleting...' : 'Delete message'}
+          </button>
+        </div>
+
         <Link
           href="/write"
           className="inline-block text-sm text-black underline hover:no-underline"
@@ -146,6 +219,40 @@ export default function MessagePage() {
           Pay it forward - write a message to someone you care about
         </Link>
       </footer>
+
+      {/* Report Modal */}
+      {showReportModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <h2 className="text-lg font-semibold mb-4">Report this message</h2>
+            <p className="text-sm text-gray-600 mb-4">
+              Please describe why you&apos;re reporting this message. An admin will review it.
+            </p>
+            <textarea
+              value={reportReason}
+              onChange={(e) => setReportReason(e.target.value)}
+              placeholder="Reason for reporting..."
+              rows={4}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none mb-4"
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={handleReport}
+                disabled={reporting || !reportReason.trim()}
+                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50"
+              >
+                {reporting ? 'Submitting...' : 'Submit Report'}
+              </button>
+              <button
+                onClick={() => setShowReportModal(false)}
+                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   )
 }

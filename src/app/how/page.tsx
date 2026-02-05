@@ -42,7 +42,7 @@ export default async function HowPage() {
           <div className="p-4 bg-gray-50 rounded-lg mb-4 text-gray-700">
             <p className="mb-2"><strong>Instead of:</strong> &quot;You&apos;re always there for me.&quot;</p>
             <p><strong>Try:</strong> &quot;When I called you at 2am after my breakup and you just listened
-              for two hours without trying to fix anything &mdash; that saved me.&quot;</p>
+              for two hours without trying to fix anything. That saved me.&quot;</p>
           </div>
 
           <h2 className="text-xl font-semibold mt-8 mb-4">Say the uncomfortable part</h2>
@@ -65,7 +65,7 @@ export default async function HowPage() {
           <h2 className="text-xl font-semibold mt-8 mb-4">Don&apos;t explain who you are</h2>
           <p className="text-gray-600 mb-4">
             You&apos;re anonymous. Resist the urge to give hints about your identity.
-            It&apos;s not about you being recognized &mdash; it&apos;s about them feeling valued.
+            It&apos;s not about you being recognized. It&apos;s about them feeling valued.
           </p>
 
           <h2 className="text-xl font-semibold mt-8 mb-4">Don&apos;t ask for anything</h2>

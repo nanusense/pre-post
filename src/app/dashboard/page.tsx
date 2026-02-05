@@ -40,10 +40,10 @@ export default async function DashboardPage() {
         {/* Main action */}
         <Link
           href="/write"
-          className="block w-full p-6 bg-black text-white rounded-lg hover:bg-gray-800 mb-4"
+          className="block w-full p-6 bg-emerald-100 rounded-lg hover:bg-emerald-200 transition-colors mb-4"
         >
-          <p className="text-lg font-medium">Write a Message</p>
-          <p className="text-sm text-gray-300 mt-1">
+          <p className="text-lg font-medium text-emerald-900">Write a Message</p>
+          <p className="text-sm text-emerald-700 mt-1">
             You have {user.credits} credit{user.credits !== 1 ? 's' : ''}
           </p>
         </Link>
@@ -52,24 +52,27 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-3 gap-4">
           <Link
             href="/inbox"
-            className="p-5 border border-gray-200 rounded-lg hover:border-gray-300"
+            className="p-5 rounded-lg bg-amber-50 hover:bg-amber-100 transition-colors"
           >
-            <p className="text-3xl font-semibold">{unreadCount}</p>
-            <p className="text-sm text-gray-500 mt-1">Unread</p>
+            <p className="text-3xl font-semibold text-amber-900">{unreadCount}</p>
+            <p className="text-sm text-amber-700 mt-1">Unread</p>
           </Link>
 
           <Link
             href="/inbox"
-            className="p-5 border border-gray-200 rounded-lg hover:border-gray-300"
+            className="p-5 rounded-lg bg-violet-50 hover:bg-violet-100 transition-colors"
           >
-            <p className="text-3xl font-semibold">{readCount}</p>
-            <p className="text-sm text-gray-500 mt-1">Read</p>
+            <p className="text-3xl font-semibold text-violet-900">{readCount}</p>
+            <p className="text-sm text-violet-700 mt-1">Read</p>
           </Link>
 
-          <div className="p-5 border border-gray-200 rounded-lg">
-            <p className="text-3xl font-semibold">{sentCount}</p>
-            <p className="text-sm text-gray-500 mt-1">Sent</p>
-          </div>
+          <Link
+            href="/sent"
+            className="p-5 rounded-lg bg-sky-50 hover:bg-sky-100 transition-colors"
+          >
+            <p className="text-3xl font-semibold text-sky-900">{sentCount}</p>
+            <p className="text-sm text-sky-700 mt-1">Sent</p>
+          </Link>
         </div>
       </main>
     </>

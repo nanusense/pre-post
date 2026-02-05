@@ -1,0 +1,81 @@
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
+import { getCurrentUser, isAdmin } from '@/lib/auth'
+import { db } from '@/lib/db'
+import Header from '@/components/Header'
+
+export default async function SentPage() {
+  const user = await getCurrentUser()
+
+  if (!user) {
+    redirect('/login')
+  }
+
+  const messages = await db.message.findMany({
+    where: {
+      senderId: user.id,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+
+  return (
+    <>
+      <Header user={{ email: user.email, credits: user.credits, isAdmin: isAdmin(user.email) }} />
+      <main className="max-w-2xl mx-auto px-4 py-8">
+        <div className="mb-6">
+          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700">
+            &larr; Back
+          </Link>
+        </div>
+
+        <h1 className="text-2xl font-semibold mb-6">Sent Messages</h1>
+
+        {messages.length === 0 ? (
+          <div className="text-center py-8">
+            <p className="text-gray-500 mb-4">You haven&apos;t sent any messages yet</p>
+            <Link
+              href="/write"
+              className="inline-block px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800"
+            >
+              Write your first message
+            </Link>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {messages.map((message) => {
+              const date = new Date(message.createdAt).toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+              })
+
+              return (
+                <div
+                  key={message.id}
+                  className="p-4 rounded-lg border border-gray-200 bg-white"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-medium">To: {message.recipientName}</span>
+                    <span className="text-sm text-gray-400">{date}</span>
+                  </div>
+                  <p className="text-sm text-gray-500">{message.recipientEmail}</p>
+                  <p className="text-sm text-gray-600 mt-2 line-clamp-2">
+                    {message.content.slice(0, 120)}...
+                  </p>
+                  <div className="mt-2">
+                    {message.isRead ? (
+                      <span className="text-xs text-green-600">Read</span>
+                    ) : (
+                      <span className="text-xs text-gray-400">Not yet read</span>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </main>
+    </>
+  )
+}

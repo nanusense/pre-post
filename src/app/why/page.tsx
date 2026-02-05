@@ -33,6 +33,26 @@ export default async function WhyPage() {
             But someday rarely comes. And sometimes, it comes too late.
           </p>
 
+          <h2 className="text-xl font-semibold mt-8 mb-4">We say the nicest things too late</h2>
+          <p className="text-gray-600 mb-4">
+            Have you ever noticed how memory walls and tribute pages overflow with
+            heartfelt messages? People write the most beautiful things about someone
+            - after they&apos;re gone.
+          </p>
+          <p className="text-gray-600 mb-4">
+            &quot;You changed my life.&quot; &quot;I never told you how much you meant to me.&quot;
+            &quot;I wish I had said this sooner.&quot;
+          </p>
+          <p className="text-gray-600 mb-4">
+            These memory walls often have more messages than that person ever received
+            in their DMs while they were alive. We wait until it&apos;s too late to say
+            what we really feel.
+          </p>
+          <p className="text-gray-600 mb-4">
+            Pre-Post exists so you don&apos;t have to wait. Say it now, while they can
+            still read it.
+          </p>
+
           <h2 className="text-xl font-semibold mt-8 mb-4">Why anonymity matters</h2>
           <p className="text-gray-600 mb-4">
             The hardest words to say aren&apos;t hard because of what they contain.
@@ -62,7 +82,7 @@ export default async function WhyPage() {
 
           <h2 className="text-xl font-semibold mt-8 mb-4">One message, one person</h2>
           <p className="text-gray-600 mb-4">
-            You can only send one message per person. This isn&apos;t a limitation &mdash;
+            You can only send one message per person. This isn&apos;t a limitation,
             it&apos;s liberation.
           </p>
           <p className="text-gray-600 mb-4">
@@ -77,7 +97,7 @@ export default async function WhyPage() {
           </p>
           <p className="text-gray-600 mb-4">
             This forces you to mean what you say. And it makes the message
-            more meaningful to the recipient &mdash; they know you can&apos;t unsay it.
+            more meaningful to the recipient. They know you can&apos;t unsay it.
           </p>
 
           <div className="mt-12 p-6 bg-gray-50 rounded-lg">

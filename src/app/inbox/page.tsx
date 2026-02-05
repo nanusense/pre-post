@@ -14,6 +14,7 @@ export default async function InboxPage() {
   const messages = await db.message.findMany({
     where: {
       recipientId: user.id,
+      isDeleted: false,
     },
     orderBy: {
       createdAt: 'desc',

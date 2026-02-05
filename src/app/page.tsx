@@ -25,7 +25,7 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="max-w-2xl mx-auto px-4 py-16 sm:py-24">
         <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6">
-          Write what you&apos;ve never said
+          One message. Anonymous. Say it before it&apos;s too late.
         </h1>
         <p className="text-xl text-gray-600 mb-8 leading-relaxed">
           Send anonymous, heartfelt messages to people you care about.
@@ -52,7 +52,10 @@ export default async function HomePage() {
       {/* How it works */}
       <section className="border-t border-gray-200">
         <div className="max-w-2xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-semibold mb-8">How it works</h2>
+          <h2 className="text-2xl font-semibold mb-4">How it works</h2>
+          <p className="text-gray-600 mb-8">
+            We often say the right things about people after they&apos;re no longer in our lives, or after they&apos;ve left us too soon. Pre-Post helps you say it now.
+          </p>
 
           <div className="space-y-8">
             <div className="flex gap-4">
@@ -75,7 +78,7 @@ export default async function HomePage() {
               <div>
                 <h3 className="font-medium mb-1">They get notified</h3>
                 <p className="text-gray-600">
-                  The recipient receives an email saying someone wrote them a heartfelt
+                  The recipient receives an email saying someone wrote them a
                   message. They won&apos;t know it&apos;s from you.
                 </p>
               </div>
@@ -89,7 +92,7 @@ export default async function HomePage() {
                 <h3 className="font-medium mb-1">Pay it forward</h3>
                 <p className="text-gray-600">
                   To read a message, they must first write one to someone else.
-                  This creates a chain of heartfelt words spreading through the world.
+                  This creates a chain of kind words spreading through the world.
                 </p>
               </div>
             </div>
@@ -108,15 +111,15 @@ export default async function HomePage() {
             </li>
             <li className="flex gap-2">
               <span className="text-black">&#10003;</span>
-              <span>Messages are permanent &mdash; no edits, no deletes</span>
+              <span>Messages sent are permanent - no edits, no deletes</span>
             </li>
             <li className="flex gap-2">
               <span className="text-black">&#10003;</span>
-              <span>One message per person &mdash; make it count</span>
+              <span>One message per person - make it count</span>
             </li>
             <li className="flex gap-2">
               <span className="text-black">&#10003;</span>
-              <span>Messages wait forever until they&apos;re read</span>
+              <span>Messages stay in your inbox, until you delete them</span>
             </li>
           </ul>
         </div>
