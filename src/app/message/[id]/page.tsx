@@ -129,8 +129,11 @@ export default function MessagePage() {
 
         <div className="text-center py-12">
           <h1 className="text-2xl font-semibold mb-4">You need a credit to read this</h1>
+          <p className="text-gray-600 mb-4">
+            1 credit = 1 message you can read.
+          </p>
           <p className="text-gray-600 mb-6">
-            Write a message to someone you care about to earn a credit.
+            Write a message to someone you care about to earn 1 credit.
           </p>
           <Link
             href="/write"

@@ -36,10 +36,11 @@ export default async function InboxPage() {
         <h1 className="text-2xl font-semibold mb-6">Inbox</h1>
 
         {user.credits < 1 && unreadCount > 0 && (
-          <div className="mb-6 p-4 bg-orange-50 border border-orange-200 rounded-lg">
-            <p className="font-medium mb-1">You need a credit to read messages</p>
-            <p className="text-sm text-gray-600 mb-3">
-              Write a message to someone to earn a credit.
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="font-medium text-red-800 mb-1">You need credits to read messages</p>
+            <p className="text-sm text-red-700 mb-3">
+              You have {unreadCount} unread message{unreadCount !== 1 ? 's' : ''}, so you need {unreadCount} credit{unreadCount !== 1 ? 's' : ''}.
+              Write a message to someone to earn 1 credit.
             </p>
             <Link
               href="/write"
@@ -66,10 +67,10 @@ export default async function InboxPage() {
                 <Link
                   key={message.id}
                   href={`/message/${message.id}`}
-                  className={`block p-4 rounded-lg border transition-colors ${
+                  className={`block p-4 rounded-lg transition-colors ${
                     message.isRead
-                      ? 'border-gray-100 bg-white hover:bg-gray-50'
-                      : 'border-gray-200 bg-gray-50 hover:bg-gray-100'
+                      ? 'bg-emerald-50 hover:bg-emerald-100'
+                      : 'bg-amber-50 hover:bg-amber-100'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -78,10 +79,10 @@ export default async function InboxPage() {
                         <span className="w-2 h-2 bg-black rounded-full"></span>
                       )}
                       <span className={message.isRead ? 'text-gray-600' : 'font-medium'}>
-                        To: {message.recipientName}
+                        Anonymous message {message.isRead ? '(read)' : '(received)'}
                       </span>
                     </div>
-                    <span className="text-sm text-gray-400">{date}</span>
+                    <span className="text-sm text-gray-500">{date}</span>
                   </div>
                   {message.isRead && (
                     <p className="text-sm text-gray-500 mt-1 truncate pl-5">

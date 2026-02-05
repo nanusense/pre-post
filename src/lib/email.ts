@@ -77,6 +77,9 @@ export async function sendNewMessageNotification(recipientEmail: string, recipie
           <p style="font-size: 14px; color: #6b7280; margin-bottom: 8px;">
             Pre-Post is a platform for anonymous messages. People use it to say things they've never had the courage to say - thank yous, apologies, appreciations, and words that matter.
           </p>
+          <p style="font-size: 14px; color: #6b7280; margin-bottom: 8px;">
+            Memory walls receive more messages than personal DMs. We want to change that.
+          </p>
           <p style="font-size: 14px; color: #6b7280;">
             The sender's identity is never revealed. You'll never know who wrote it.
           </p>
