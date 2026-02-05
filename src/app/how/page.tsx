@@ -30,29 +30,28 @@ export default async function HowPage() {
           </p>
           <div className="p-4 bg-gray-50 rounded-lg mb-4 text-gray-700">
             <p className="italic">
-              &quot;You probably don&apos;t know this, but you changed my life when you...&quot;
+              &quot;You probably don&apos;t know this, but you&apos;ve had a bigger impact on my life than you realize...&quot;
             </p>
           </div>
 
-          <h2 className="text-xl font-semibold mt-8 mb-4">Be specific</h2>
+          <h2 className="text-xl font-semibold mt-8 mb-4">Focus on how they made you feel</h2>
           <p className="text-gray-600 mb-4">
-            Generic praise is forgettable. Specific moments are unforgettable.
-            Mention actual things they said or did. The more concrete, the better.
+            Instead of describing specific events that might reveal who you are,
+            focus on the impact they had on you. Describe the feeling, not the moment.
           </p>
           <div className="p-4 bg-gray-50 rounded-lg mb-4 text-gray-700">
-            <p className="mb-2"><strong>Instead of:</strong> &quot;You&apos;re always there for me.&quot;</p>
-            <p><strong>Try:</strong> &quot;When I called you at 2am after my breakup and you just listened
-              for two hours without trying to fix anything. That saved me.&quot;</p>
+            <p className="mb-2"><strong>Instead of:</strong> &quot;When we worked on that project together...&quot;</p>
+            <p><strong>Try:</strong> &quot;You made me feel like my ideas mattered. That changed how I see myself.&quot;</p>
           </div>
 
-          <h2 className="text-xl font-semibold mt-8 mb-4">Say the uncomfortable part</h2>
+          <h2 className="text-xl font-semibold mt-8 mb-4">Say what you&apos;ve held back</h2>
           <p className="text-gray-600 mb-4">
-            The words you&apos;re most afraid to say are usually the ones that matter most.
-            This is your chance to say them without the fear of their reaction.
+            The words you&apos;ve never said are usually the ones that matter most.
+            Share the emotion, not the story. Keep details vague to stay anonymous.
           </p>
           <div className="p-4 bg-gray-50 rounded-lg mb-4 text-gray-700">
             <p className="italic">
-              &quot;I know we&apos;ve grown apart, but I still think about our friendship all the time...&quot;
+              &quot;I&apos;ve always admired how you treat people. It inspires me to be better.&quot;
             </p>
           </div>
 
@@ -82,10 +81,10 @@ export default async function HowPage() {
 
           <h2 className="text-xl font-semibold mt-8 mb-4">Prompts to get you started</h2>
           <ul className="space-y-2 text-gray-600 mb-8">
-            <li>&quot;I never told you this, but...&quot;</li>
-            <li>&quot;You probably don&apos;t remember, but there was this time when you...&quot;</li>
-            <li>&quot;When I think about the people who shaped who I am, you&apos;re...&quot;</li>
-            <li>&quot;I&apos;ve always wanted to thank you for...&quot;</li>
+            <li>&quot;I&apos;ve always admired how you...&quot;</li>
+            <li>&quot;You make people feel...&quot;</li>
+            <li>&quot;The world is better because you...&quot;</li>
+            <li>&quot;I&apos;ve always wanted to thank you for being...&quot;</li>
             <li>&quot;If I could tell you one thing you should know about yourself, it&apos;s...&quot;</li>
           </ul>
 

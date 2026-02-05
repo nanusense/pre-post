@@ -29,8 +29,7 @@ export default async function HomePage() {
         </h1>
         <p className="text-xl text-gray-600 mb-8 leading-relaxed">
           Send anonymous, heartfelt messages to people you care about.
-          To read a message someone wrote for you, first pay it forward
-          by writing one yourself.
+          Before you can read, you must write. That&apos;s how kindness spreads.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4">
@@ -57,42 +56,38 @@ export default async function HomePage() {
             We often say the right things about people after they&apos;re no longer in our lives, or after they&apos;ve left us too soon. Pre-Post helps you say it now.
           </p>
 
-          <div className="space-y-8">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium">
-                1
-              </div>
+          <div className="space-y-4">
+            <div className="flex gap-4 items-start">
+              <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium flex-shrink-0">1</div>
               <div>
                 <h3 className="font-medium mb-1">Write from the heart</h3>
                 <p className="text-gray-600">
                   Think of someone who matters to you. Write them a message you&apos;ve
                   never had the courage to say. It&apos;s completely anonymous.
                 </p>
+                <p className="text-gray-300 mt-2">↓</p>
               </div>
             </div>
 
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium">
-                2
-              </div>
+            <div className="flex gap-4 items-start">
+              <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium flex-shrink-0">2</div>
               <div>
                 <h3 className="font-medium mb-1">They get notified</h3>
                 <p className="text-gray-600">
                   The recipient receives an email saying someone wrote them a
                   message. They won&apos;t know it&apos;s from you.
                 </p>
+                <p className="text-gray-300 mt-2">↓</p>
               </div>
             </div>
 
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium">
-                3
-              </div>
+            <div className="flex gap-4 items-start">
+              <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium flex-shrink-0">3</div>
               <div>
                 <h3 className="font-medium mb-1">Pay it forward</h3>
                 <p className="text-gray-600">
-                  To read a message, they must first write one to someone else.
-                  This creates a chain of kind words spreading through the world.
+                  You earn credits by writing messages. You spend credits to read messages.
+                  One write = one read. That&apos;s the pay-it-forward model.
                 </p>
               </div>
             </div>
