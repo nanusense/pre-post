@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { containsBlockedContent } from '@/lib/content-filter'
 
 export default function MessageForm() {
   const router = useRouter()
@@ -15,6 +16,21 @@ export default function MessageForm() {
     e.preventDefault()
     setLoading(true)
     setError('')
+
+    // Check for blocked content
+    const contentCheck = containsBlockedContent(content)
+    if (contentCheck.blocked) {
+      setError(contentCheck.reason || 'Message contains inappropriate content')
+      setLoading(false)
+      return
+    }
+
+    const nameCheck = containsBlockedContent(recipientName)
+    if (nameCheck.blocked) {
+      setError('Recipient name contains inappropriate content')
+      setLoading(false)
+      return
+    }
 
     try {
       const res = await fetch('/api/messages', {

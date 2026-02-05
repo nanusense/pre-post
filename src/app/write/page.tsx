@@ -29,7 +29,15 @@ export default async function WritePage() {
 
         <MessageForm />
 
-        <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+        <div className="mt-8 p-4 bg-red-50 border border-red-100 rounded-lg">
+          <h2 className="font-medium mb-2 text-red-800">Community guidelines</h2>
+          <p className="text-sm text-red-700">
+            Foul language, hate speech, and abusive messages are not allowed.
+            Users who violate these guidelines may be reported and banned.
+          </p>
+        </div>
+
+        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
           <h2 className="font-medium mb-2">Writing tips</h2>
           <ul className="text-sm text-gray-600 space-y-1">
             <li>Be specific about what you appreciate about them</li>

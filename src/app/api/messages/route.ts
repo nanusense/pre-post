@@ -3,6 +3,7 @@ import { getCurrentUser } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { awardCredit } from '@/lib/credits'
 import { sendNewMessageNotification } from '@/lib/email'
+import { containsBlockedContent } from '@/lib/content-filter'
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,6 +21,17 @@ export async function POST(request: NextRequest) {
 
     if (!recipientName || !recipientEmail || !content) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 })
+    }
+
+    // Check for blocked content
+    const contentCheck = containsBlockedContent(content)
+    if (contentCheck.blocked) {
+      return NextResponse.json({ error: contentCheck.reason }, { status: 400 })
+    }
+
+    const nameCheck = containsBlockedContent(recipientName)
+    if (nameCheck.blocked) {
+      return NextResponse.json({ error: 'Recipient name contains inappropriate content' }, { status: 400 })
     }
 
     const normalizedEmail = recipientEmail.toLowerCase().trim()
