@@ -10,15 +10,20 @@ export default async function HomePage() {
       <header className="border-b border-gray-200">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <span className="text-xl font-semibold">Pre-Post</span>
-          {user ? (
-            <Link href="/dashboard" className="text-sm text-gray-600 hover:text-black">
-              Dashboard
+          <nav className="flex items-center gap-4">
+            <Link href="/why" className="text-sm text-gray-600 hover:text-black">
+              The Why
             </Link>
-          ) : (
-            <Link href="/login" className="text-sm text-gray-600 hover:text-black">
-              Sign in
-            </Link>
-          )}
+            {user ? (
+              <Link href="/dashboard" className="text-sm text-gray-600 hover:text-black">
+                Dashboard
+              </Link>
+            ) : (
+              <Link href="/login" className="text-sm text-gray-600 hover:text-black">
+                Sign in
+              </Link>
+            )}
+          </nav>
         </div>
       </header>
 
