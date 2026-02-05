@@ -80,8 +80,11 @@ function LoginForm() {
   return (
     <div className="w-full max-w-sm">
       <h1 className="text-2xl font-semibold mb-2">Sign in</h1>
-      <p className="text-gray-600 mb-6">
+      <p className="text-gray-600 mb-2">
         Enter your email to receive a magic link
+      </p>
+      <p className="text-gray-400 text-sm mb-6">
+        No password needed. We&apos;ll email you a secure link to sign in.
       </p>
 
       {(errorParam || error) && (
