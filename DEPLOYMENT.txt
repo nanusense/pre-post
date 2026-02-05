@@ -1,0 +1,153 @@
+PRE-POST DEPLOYMENT GUIDE
+==========================
+Digital Ocean App Platform + Resend Email
+
+================================================================================
+PART 1: RESEND EMAIL CONFIGURATION
+================================================================================
+
+1. Go to https://resend.com/domains
+
+2. Click "Add Domain" and enter: pre-post.com
+
+3. Resend will provide DNS records. Add these in Digital Ocean:
+   - Go to Digital Ocean → Networking → Domains → pre-post.com
+   - Add the SPF record (TXT)
+   - Add the DKIM record (TXT)
+
+4. Return to Resend and click "Verify"
+   (DNS can take a few minutes to hours to propagate)
+
+5. Once verified, update the email sender in your code:
+   File: src/lib/email.ts
+   Change: from: 'Pre-Post <noreply@resend.dev>'
+   To:     from: 'Pre-Post <hello@pre-post.com>'
+
+================================================================================
+PART 2: CREATE POSTGRESQL DATABASE
+================================================================================
+
+1. Digital Ocean → Databases → Create Database Cluster
+
+2. Choose:
+   - Engine: PostgreSQL
+   - Plan: Basic ($15/month) or Dev Database (free, limited)
+   - Datacenter: Same region as your app
+   - Name: pre-post-db
+
+3. Wait for provisioning to complete
+
+4. Copy the connection string (you'll need it later)
+
+================================================================================
+PART 3: CREATE APP ON DIGITAL OCEAN
+================================================================================
+
+1. Digital Ocean → Create → Apps
+
+2. Connect to GitHub:
+   - Repository: nanusense/pre-post
+   - Branch: main
+
+3. Configure the Web Service:
+   - Build Command: npx prisma generate && npx prisma db push && npm run build
+   - Run Command: npm start
+
+4. Add Database Resource:
+   - Click "Add Resource"
+   - Select "Database"
+   - Choose the database you created (or create a Dev Database)
+   - Name: db
+
+================================================================================
+PART 4: ENVIRONMENT VARIABLES
+================================================================================
+
+Add these environment variables in App Settings:
+
+DATABASE_URL
+  - If you attached a database, this is auto-added
+  - Otherwise, paste your PostgreSQL connection string
+
+JWT_SECRET
+  - Generate with: openssl rand -hex 32
+  - Example: a1b2c3d4e5f6... (64 character hex string)
+
+RESEND_API_KEY
+  - Your Resend API key
+  - Value: re_9KdMS9mf_JKjWCAZoqUAYMW1QLQ2srwMs
+
+NEXT_PUBLIC_APP_URL
+  - Value: https://pre-post.com
+
+ADMIN_EMAILS
+  - Your email address for admin access
+  - Example: your-email@example.com
+
+================================================================================
+PART 5: CONFIGURE DOMAIN
+================================================================================
+
+1. After deployment, go to App Settings → Domains
+
+2. Add your domains:
+   - pre-post.com
+   - www.pre-post.com
+
+3. Digital Ocean will provide CNAME records
+
+4. Add these CNAME records in Digital Ocean DNS:
+   - Go to Networking → Domains → pre-post.com
+   - Add the CNAME records provided
+
+5. SSL certificates are automatically provisioned
+
+================================================================================
+PART 6: VERIFY DEPLOYMENT
+================================================================================
+
+1. Visit https://pre-post.com
+
+2. Test the login flow:
+   - Enter your email
+   - Check for magic link email
+   - Click to login
+
+3. Test sending a message:
+   - Write a message to yourself or another email
+   - Verify the recipient gets notified
+
+4. Check admin dashboard:
+   - Go to /admin (only works if your email is in ADMIN_EMAILS)
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Emails not sending:
+  - Check Resend dashboard for errors
+  - Verify domain is verified in Resend
+  - Check RESEND_API_KEY is correct
+
+Database errors:
+  - Check DATABASE_URL is correct
+  - Run build command manually: npx prisma db push
+
+Login not working:
+  - Check JWT_SECRET is set
+  - Check NEXT_PUBLIC_APP_URL matches your domain
+
+================================================================================
+USEFUL COMMANDS
+================================================================================
+
+Generate JWT secret:
+  openssl rand -hex 32
+
+Check app logs (in Digital Ocean):
+  App → Runtime Logs
+
+Redeploy:
+  Push to main branch, or click "Deploy" in Digital Ocean
+
+================================================================================
