@@ -20,8 +20,7 @@ export default async function WhyPage() {
 
           <p className="text-lg text-gray-600 mb-8 leading-relaxed">
             We all have things we&apos;ve never said. To parents, friends, partners,
-            mentors, old classmates. Words that got stuck somewhere between
-            our hearts and our mouths.
+            mentors, old classmates. Words we meant to say but never did.
           </p>
 
           <h2 className="text-xl font-semibold mt-8 mb-4">The problem with &quot;someday&quot;</h2>

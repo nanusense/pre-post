@@ -57,11 +57,33 @@ export default async function InboxPage() {
           </p>
         ) : (
           <div className="space-y-2">
-            {messages.map((message) => {
-              const date = new Date(message.createdAt).toLocaleDateString('en-US', {
+            {messages.map((message, index) => {
+              const messageNumber = String(messages.length - index).padStart(3, '0')
+              const messageDate = new Date(message.createdAt)
+              const now = new Date()
+              const diffMs = now.getTime() - messageDate.getTime()
+              const diffMins = Math.floor(diffMs / 60000)
+              const diffHours = Math.floor(diffMs / 3600000)
+              const diffDays = Math.floor(diffMs / 86400000)
+
+              const formattedDate = messageDate.toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
+                year: messageDate.getFullYear() !== now.getFullYear() ? 'numeric' : undefined,
               })
+
+              let relativeTime: string
+              if (diffMins < 60) {
+                relativeTime = diffMins <= 1 ? 'Just now' : `${diffMins} mins ago`
+              } else if (diffHours < 24) {
+                relativeTime = diffHours === 1 ? '1 hour ago' : `${diffHours} hours ago`
+              } else if (diffDays < 7) {
+                relativeTime = diffDays === 1 ? 'Yesterday' : `${diffDays} days ago`
+              } else {
+                relativeTime = ''
+              }
+
+              const date = relativeTime ? `${relativeTime} · ${formattedDate}` : formattedDate
 
               return (
                 <Link
@@ -79,7 +101,7 @@ export default async function InboxPage() {
                         <span className="w-2 h-2 bg-black rounded-full"></span>
                       )}
                       <span className={message.isRead ? 'text-gray-600' : 'font-medium'}>
-                        Anonymous message {message.isRead ? '(read)' : '(received)'}
+                        Pre-Post {messageNumber} {message.isRead ? '(read)' : '(received)'}
                       </span>
                     </div>
                     <span className="text-sm text-gray-500">{date}</span>
