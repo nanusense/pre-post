@@ -110,6 +110,10 @@ export default async function HomePage() {
             </li>
             <li className="flex gap-2">
               <span className="text-black">&#10003;</span>
+              <span>Messages are private - only you and the recipient can read them</span>
+            </li>
+            <li className="flex gap-2">
+              <span className="text-black">&#10003;</span>
               <span>Messages sent are permanent - no edits, no deletes</span>
             </li>
             <li className="flex gap-2">
