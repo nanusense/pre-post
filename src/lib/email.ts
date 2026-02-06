@@ -20,7 +20,7 @@ export async function sendMagicLinkEmail(email: string, token: string) {
   }
 
   const { error } = await resend.emails.send({
-    from: 'Pre-Post <noreply@resend.dev>',
+    from: 'Pre-Post <hello@pre-post.com>',
     to: email,
     subject: 'Your login link for Pre-Post',
     html: `
@@ -57,7 +57,7 @@ export async function sendNewMessageNotification(recipientEmail: string, recipie
   }
 
   const { error } = await resend.emails.send({
-    from: 'Pre-Post <noreply@resend.dev>',
+    from: 'Pre-Post <hello@pre-post.com>',
     to: recipientEmail,
     subject: 'Someone wrote something heartfelt for you',
     html: `
@@ -121,7 +121,7 @@ export async function sendWelcomeEmail(email: string) {
   }
 
   const { error } = await resend.emails.send({
-    from: 'Pre-Post <noreply@resend.dev>',
+    from: 'Pre-Post <hello@pre-post.com>',
     to: email,
     subject: 'Welcome to Pre-Post',
     html: `
