@@ -1,12 +1,11 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 export default function OnboardingModal() {
   const searchParams = useSearchParams()
-  const router = useRouter()
   const isWelcome = searchParams.get('welcome')
   const [show, setShow] = useState(false)
 
