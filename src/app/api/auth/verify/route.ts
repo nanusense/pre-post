@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { createSession } from '@/lib/auth'
+import { sendWelcomeEmail } from '@/lib/email'
 
 export async function GET(request: NextRequest) {
   try {
@@ -36,13 +37,25 @@ export async function GET(request: NextRequest) {
 
     // Get or create user
     let user = magicLink.user
+    let isNewUser = false
 
     if (!user) {
-      user = await db.user.upsert({
+      // Check if user already exists
+      const existingUser = await db.user.findUnique({
         where: { email: magicLink.email },
-        update: {},
-        create: { email: magicLink.email },
       })
+
+      if (existingUser) {
+        user = existingUser
+      } else {
+        user = await db.user.create({
+          data: { email: magicLink.email },
+        })
+        isNewUser = true
+
+        // Send welcome email to new users
+        await sendWelcomeEmail(user.email)
+      }
 
       // Link any messages sent to this email
       await db.message.updateMany({
@@ -59,7 +72,11 @@ export async function GET(request: NextRequest) {
     const sessionToken = await createSession(user.id, user.email)
 
     // Redirect to dashboard with session cookie
-    const response = NextResponse.redirect(new URL('/dashboard', request.url))
+    const redirectUrl = new URL('/dashboard', request.url)
+    if (isNewUser) {
+      redirectUrl.searchParams.set('welcome', 'true')
+    }
+    const response = NextResponse.redirect(redirectUrl)
     response.cookies.set('session', sessionToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

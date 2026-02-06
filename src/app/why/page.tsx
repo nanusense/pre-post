@@ -102,6 +102,45 @@ export default async function WhyPage() {
             more meaningful to the recipient. They know you can&apos;t unsay it.
           </p>
 
+          <h2 className="text-xl font-semibold mt-12 mb-6">Frequently asked questions</h2>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-medium mb-2">Will the recipient know it&apos;s from me?</h3>
+              <p className="text-gray-600">
+                No. Your identity is never revealed. They&apos;ll only know that someone who knows them sent it.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-medium mb-2">Why do I need to write before I can read?</h3>
+              <p className="text-gray-600">
+                This is the pay-it-forward model. By writing a message first, you contribute to spreading kindness before receiving it.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-medium mb-2">Can I send more than one message to the same person?</h3>
+              <p className="text-gray-600">
+                No. One message per person. This makes each message more intentional and meaningful.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-medium mb-2">Can I edit or delete a message after sending?</h3>
+              <p className="text-gray-600">
+                No. Messages are permanent. This encourages you to mean what you say.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-medium mb-2">What if I receive an abusive message?</h3>
+              <p className="text-gray-600">
+                You can report it using the &quot;Report abuse&quot; button. An admin will review it and may suspend the sender.
+              </p>
+            </div>
+          </div>
+
           <div className="mt-12 p-6 bg-gray-50 rounded-lg">
             <p className="text-gray-700 mb-4">
               Think of someone right now. Someone who&apos;s made your life better.

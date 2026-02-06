@@ -110,3 +110,56 @@ export async function sendNewMessageNotification(recipientEmail: string, recipie
 
   return { success: true }
 }
+
+export async function sendWelcomeEmail(email: string) {
+  const resend = getResendClient()
+
+  // In development without API key, just log
+  if (!resend) {
+    console.log('Welcome email (no email sent):', email)
+    return { success: true }
+  }
+
+  const { error } = await resend.emails.send({
+    from: 'Pre-Post <noreply@resend.dev>',
+    to: email,
+    subject: 'Welcome to Pre-Post',
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Welcome to Pre-Post!</h1>
+
+        <p style="font-size: 16px; color: #444; margin-bottom: 16px;">
+          You're now part of a community that believes in saying things before it's too late.
+        </p>
+
+        <div style="background: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+          <p style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 12px;">How it works</p>
+          <ul style="font-size: 14px; color: #6b7280; padding-left: 20px; margin: 0;">
+            <li style="margin-bottom: 8px;">Write an anonymous message to someone who matters to you</li>
+            <li style="margin-bottom: 8px;">You earn 1 credit for each message you send</li>
+            <li style="margin-bottom: 8px;">Use credits to read messages others have sent you</li>
+          </ul>
+        </div>
+
+        <p style="font-size: 16px; color: #444; margin-bottom: 24px;">
+          <strong>Start by writing your first message.</strong> Think of someone who's made a difference in your life. Say what you've never said.
+        </p>
+
+        <a href="${APP_URL}/write" style="display: inline-block; background: #000; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+          Write Your First Message
+        </a>
+
+        <p style="font-size: 13px; color: #9ca3af; margin-top: 32px;">
+          Say it pre, not post.
+        </p>
+      </div>
+    `,
+  })
+
+  if (error) {
+    console.error('Failed to send welcome email:', error)
+    return { success: false, error }
+  }
+
+  return { success: true }
+}

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { getCurrentUser, isAdmin } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Header from '@/components/Header'
+import SampleMessage from '@/components/SampleMessage'
 
 export default async function InboxPage() {
   const user = await getCurrentUser()
@@ -36,9 +37,9 @@ export default async function InboxPage() {
         <h1 className="text-2xl font-semibold mb-6">Inbox</h1>
 
         {user.credits < 1 && unreadCount > 0 && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="font-medium text-red-800 mb-1">You need credits to read messages</p>
-            <p className="text-sm text-red-700 mb-3">
+          <div className="mb-6 p-4 bg-orange-50 border border-orange-200 rounded-lg">
+            <p className="font-medium text-orange-800 mb-1">You need credits to read messages</p>
+            <p className="text-sm text-orange-700 mb-3">
               You have {unreadCount} unread message{unreadCount !== 1 ? 's' : ''}, so you need {unreadCount} credit{unreadCount !== 1 ? 's' : ''}.
               Write a message to someone to earn 1 credit.
             </p>
@@ -52,9 +53,16 @@ export default async function InboxPage() {
         )}
 
         {messages.length === 0 ? (
-          <p className="text-gray-500 py-8 text-center">
-            No messages yet
-          </p>
+          <div className="py-8">
+            <div className="text-center mb-8">
+              <p className="text-gray-500 mb-2">No messages yet</p>
+              <p className="text-sm text-gray-400">Someone might be writing one for you right now!</p>
+            </div>
+            <div className="mb-4">
+              <p className="text-sm text-gray-500 mb-3">Here&apos;s what a message looks like:</p>
+              <SampleMessage blurred />
+            </div>
+          </div>
         ) : (
           <div className="space-y-2">
             {messages.map((message, index) => {
@@ -101,7 +109,7 @@ export default async function InboxPage() {
                         <span className="w-2 h-2 bg-black rounded-full"></span>
                       )}
                       <span className={message.isRead ? 'text-gray-600' : 'font-medium'}>
-                        Pre-Post ↓{messageNumber} {message.isRead ? '(read)' : '(received)'}
+                        Pre-Post ↓{messageNumber} {message.isRead ? '(read)' : '(unread)'}
                       </span>
                     </div>
                     <span className="text-sm text-gray-500">{date}</span>

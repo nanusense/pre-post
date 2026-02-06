@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getCurrentUser } from '@/lib/auth'
+import SampleMessage from '@/components/SampleMessage'
 
 export default async function HomePage() {
   const user = await getCurrentUser()
@@ -99,6 +100,17 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Sample Message */}
+      <section className="border-t border-gray-200">
+        <div className="max-w-2xl mx-auto px-4 py-16">
+          <h2 className="text-2xl font-semibold mb-4">What a message looks like</h2>
+          <p className="text-gray-600 mb-6">
+            Real words, from someone who cares. Anonymous and permanent.
+          </p>
+          <SampleMessage blurred />
         </div>
       </section>
 

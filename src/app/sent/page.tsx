@@ -78,7 +78,7 @@ export default async function SentPage() {
                   className="p-4 rounded-lg bg-sky-50"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium">Pre-Post ↑{messageNumber}</span>
+                    <span className="font-medium">PP ↑{messageNumber}</span>
                     <span className="text-sm text-gray-500">{date}</span>
                   </div>
                   <p className="text-sm text-gray-600">To: {message.recipientName} ({message.recipientEmail})</p>

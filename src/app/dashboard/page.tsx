@@ -1,8 +1,11 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { Suspense } from 'react'
 import { getCurrentUser, isAdmin } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Header from '@/components/Header'
+import SuccessMessage from '@/components/SuccessMessage'
+import OnboardingModal from '@/components/OnboardingModal'
 
 export default async function DashboardPage() {
   const user = await getCurrentUser()
@@ -35,7 +38,27 @@ export default async function DashboardPage() {
     <>
       <Header user={{ email: user.email, credits: user.credits, isAdmin: isAdmin(user.email) }} />
       <main className="max-w-2xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-semibold mb-8">Welcome back</h1>
+        <h1 className="text-2xl font-semibold mb-4">Welcome back</h1>
+
+        {/* Success message after sending */}
+        <Suspense fallback={null}>
+          <SuccessMessage />
+        </Suspense>
+
+        {/* Onboarding modal for new users */}
+        <Suspense fallback={null}>
+          <OnboardingModal />
+        </Suspense>
+
+        {/* First-time user prompt */}
+        {user.credits === 0 && sentCount === 0 && (
+          <div className="mb-6 p-4 bg-blue-50 border border-blue-100 rounded-lg">
+            <p className="font-medium text-blue-800 mb-1">Getting started</p>
+            <p className="text-sm text-blue-700">
+              Write your first message to someone who matters to you. Once you send it, you&apos;ll earn 1 credit to read any messages waiting for you.
+            </p>
+          </div>
+        )}
 
         {/* Main action */}
         <Link
