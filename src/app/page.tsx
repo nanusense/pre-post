@@ -37,7 +37,7 @@ export default async function HomePage() {
         <div className="flex flex-col sm:flex-row gap-4">
           <Link
             href={user ? '/write' : '/login'}
-            className="inline-block px-6 py-3 bg-black text-white text-center rounded-lg font-medium hover:bg-gray-800"
+            className="inline-block px-6 py-3 bg-[#DDE3D5] text-gray-900 text-center rounded-lg font-medium hover:bg-[#CDD3C5]"
           >
             Write a Message
           </Link>
@@ -140,7 +140,7 @@ export default async function HomePage() {
           </p>
           <Link
             href={user ? '/write' : '/login'}
-            className="inline-block px-8 py-4 bg-black text-white rounded-lg font-medium hover:bg-gray-800"
+            className="inline-block px-8 py-4 bg-[#DDE3D5] text-gray-900 rounded-lg font-medium hover:bg-[#CDD3C5]"
           >
             Write Your Message
           </Link>
