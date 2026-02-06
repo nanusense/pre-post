@@ -104,38 +104,38 @@ export default async function WhyPage() {
 
           <h2 className="text-xl font-semibold mt-12 mb-6">Frequently asked questions</h2>
 
-          <div className="space-y-6">
-            <div>
+          <div className="grid gap-4">
+            <div className="bg-gray-50 rounded-lg p-5">
               <h3 className="font-medium mb-2">Will the recipient know it&apos;s from me?</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-sm">
                 No. Your identity is never revealed. They&apos;ll only know that someone who knows them sent it.
               </p>
             </div>
 
-            <div>
+            <div className="bg-gray-50 rounded-lg p-5">
               <h3 className="font-medium mb-2">Why do I need to write before I can read?</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-sm">
                 This is the pay-it-forward model. By writing a message first, you contribute to spreading kindness before receiving it.
               </p>
             </div>
 
-            <div>
+            <div className="bg-gray-50 rounded-lg p-5">
               <h3 className="font-medium mb-2">Can I send more than one message to the same person?</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-sm">
                 No. One message per person. This makes each message more intentional and meaningful.
               </p>
             </div>
 
-            <div>
+            <div className="bg-gray-50 rounded-lg p-5">
               <h3 className="font-medium mb-2">Can I edit or delete a message after sending?</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-sm">
                 No. Messages are permanent. This encourages you to mean what you say.
               </p>
             </div>
 
-            <div>
+            <div className="bg-gray-50 rounded-lg p-5">
               <h3 className="font-medium mb-2">What if I receive an abusive message?</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 text-sm">
                 You can report it using the &quot;Report abuse&quot; button. An admin will review it and may suspend the sender.
               </p>
             </div>
