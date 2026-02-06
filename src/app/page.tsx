@@ -59,7 +59,7 @@ export default async function HomePage() {
           </p>
 
           <div className="space-y-4">
-            <div className="flex gap-4 items-start p-4 rounded-lg bg-violet-50">
+            <div className="flex gap-4 items-start p-4 rounded-lg bg-gray-50">
               <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium flex-shrink-0">1</div>
               <div>
                 <h3 className="font-medium mb-1">Write your message</h3>
@@ -71,7 +71,7 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="flex gap-4 items-start p-4 rounded-lg bg-amber-50">
+            <div className="flex gap-4 items-start p-4 rounded-lg bg-stone-50">
               <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium flex-shrink-0">2</div>
               <div>
                 <h3 className="font-medium mb-1">They get notified</h3>
@@ -83,7 +83,7 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="flex gap-4 items-start p-4 rounded-lg bg-teal-50">
+            <div className="flex gap-4 items-start p-4 rounded-lg bg-zinc-50">
               <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium flex-shrink-0">3</div>
               <div>
                 <h3 className="font-medium mb-1">Pay it forward</h3>
