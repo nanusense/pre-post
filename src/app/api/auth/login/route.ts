@@ -53,7 +53,10 @@ export async function POST(request: NextRequest) {
     const result = await sendMagicLinkEmail(normalizedEmail, token, isNewUser)
 
     if (!result.success) {
-      return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
+      return NextResponse.json(
+        { error: 'Unable to send login email right now. Please try again in a few minutes.' },
+        { status: 500 }
+      )
     }
 
     // In development, return the magic link for testing
