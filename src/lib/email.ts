@@ -86,7 +86,7 @@ export async function sendNewMessageNotification(recipientEmail: string, recipie
   const { error } = await resend.emails.send({
     from: 'Pre-Post <hello@pre-post.com>',
     to: recipientEmail,
-    subject: 'Someone wrote something heartfelt for you',
+    subject: 'Someone wrote something meaningful for you',
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Hi${recipientName ? ` ${recipientName}` : ''},</h1>
