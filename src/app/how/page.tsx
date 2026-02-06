@@ -70,7 +70,7 @@ export default async function HowPage() {
           <h2 className="text-xl font-semibold mt-8 mb-4">Don&apos;t ask for anything</h2>
           <p className="text-gray-600 mb-4">
             This isn&apos;t a conversation. It&apos;s a gift. Don&apos;t ask questions
-            they can&apos;t answer. Don&apos;t request a response. Just give.
+            they can&apos;t answer. Don&apos;t request a response &ndash; they don&apos;t know who you are, so they can&apos;t possibly respond. Just write.
           </p>
 
           <h2 className="text-xl font-semibold mt-8 mb-4">Take your time</h2>
