@@ -11,9 +11,6 @@ export default async function HomePage() {
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <span className="text-xl font-semibold">Pre-Post</span>
           <nav className="flex items-center gap-4">
-            <Link href="/why" className="text-sm text-gray-600 hover:text-black">
-              The Why
-            </Link>
             {user ? (
               <Link href="/dashboard" className="text-sm text-gray-600 hover:text-black">
                 Dashboard
@@ -48,7 +45,7 @@ export default async function HomePage() {
             href="/why"
             className="inline-block px-6 py-3 border border-gray-300 text-center rounded-lg font-medium hover:border-gray-400"
           >
-            Why This Exists
+            Why Pre-Post?
           </Link>
         </div>
       </section>
