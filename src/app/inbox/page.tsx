@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { getCurrentUser, isAdmin } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Header from '@/components/Header'
-import SampleMessage from '@/components/SampleMessage'
 
 export default async function InboxPage() {
   const user = await getCurrentUser()
@@ -53,15 +52,9 @@ export default async function InboxPage() {
         )}
 
         {messages.length === 0 ? (
-          <div className="py-8">
-            <div className="text-center mb-8">
-              <p className="text-gray-500 mb-2">No messages yet</p>
-              <p className="text-sm text-gray-400">Someone might be writing one for you right now!</p>
-            </div>
-            <div className="mb-4">
-              <p className="text-sm text-gray-500 mb-3">Here&apos;s what a message looks like:</p>
-              <SampleMessage blurred />
-            </div>
+          <div className="text-center py-12">
+            <p className="text-gray-500 mb-2">No messages yet</p>
+            <p className="text-sm text-gray-400">Someone might be writing one for you right now!</p>
           </div>
         ) : (
           <div className="space-y-2">
