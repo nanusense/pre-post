@@ -18,10 +18,12 @@ export async function POST(request: NextRequest) {
       where: { email: normalizedEmail },
     })
 
+    let isNewUser = false
     if (!user) {
       user = await db.user.create({
         data: { email: normalizedEmail },
       })
+      isNewUser = true
 
       // Link any messages that were sent to this email
       await db.message.updateMany({
@@ -48,7 +50,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Send email
-    const result = await sendMagicLinkEmail(normalizedEmail, token)
+    const result = await sendMagicLinkEmail(normalizedEmail, token, isNewUser)
 
     if (!result.success) {
       return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })

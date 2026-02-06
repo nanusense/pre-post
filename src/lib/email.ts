@@ -8,7 +8,7 @@ function getResendClient() {
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
 
-export async function sendMagicLinkEmail(email: string, token: string) {
+export async function sendMagicLinkEmail(email: string, token: string, isNewUser = false) {
   const magicLink = `${APP_URL}/verify?token=${token}`
 
   const resend = getResendClient()
@@ -19,11 +19,32 @@ export async function sendMagicLinkEmail(email: string, token: string) {
     return { success: true, magicLink }
   }
 
-  const { error } = await resend.emails.send({
-    from: 'Pre-Post <hello@pre-post.com>',
-    to: email,
-    subject: 'Your login link for Pre-Post',
-    html: `
+  const subject = isNewUser
+    ? 'Welcome to Pre-Post – sign in to get started'
+    : 'Your login link for Pre-Post'
+
+  const html = isNewUser
+    ? `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Welcome to Pre-Post</h1>
+        <p style="font-size: 16px; color: #444; margin-bottom: 16px;">
+          Pre-Post is a place for anonymous, meaningful messages. People use it to say things they've never had the courage to say – thank yous, appreciations, and words that matter.
+        </p>
+        <p style="font-size: 16px; color: #444; margin-bottom: 16px;">
+          Someone may have already written something for you. To read it, you'll first need to pay it forward by writing a message to someone you care about.
+        </p>
+        <p style="font-size: 16px; color: #444; margin-bottom: 24px;">
+          Click below to sign in and get started. This link expires in 15 minutes.
+        </p>
+        <a href="${magicLink}" style="display: inline-block; background: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500;">
+          Sign In to Pre-Post
+        </a>
+        <p style="font-size: 14px; color: #666; margin-top: 32px;">
+          If you didn't request this email, you can safely ignore it.
+        </p>
+      </div>
+    `
+    : `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Sign in to Pre-Post</h1>
         <p style="font-size: 16px; color: #444; margin-bottom: 24px;">
@@ -36,7 +57,13 @@ export async function sendMagicLinkEmail(email: string, token: string) {
           If you didn't request this email, you can safely ignore it.
         </p>
       </div>
-    `,
+    `
+
+  const { error } = await resend.emails.send({
+    from: 'Pre-Post <hello@pre-post.com>',
+    to: email,
+    subject,
+    html,
   })
 
   if (error) {
