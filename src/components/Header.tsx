@@ -30,7 +30,11 @@ export default function Header({ user }: HeaderProps) {
         <nav className="flex items-center gap-4">
           {user ? (
             <>
-              <span className="text-sm text-gray-600">
+              <span className={`text-sm px-3 py-1 rounded-full ${
+                  user.credits === 0
+                    ? 'bg-red-100 text-red-800'
+                    : 'bg-green-100 text-green-800'
+                }`}>
                 {user.credits} credit{user.credits !== 1 ? 's' : ''}
               </span>
               <Link

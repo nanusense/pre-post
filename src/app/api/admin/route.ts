@@ -11,11 +11,38 @@ export async function GET() {
     }
 
     // Get stats
-    const [userCount, messageCount, unreadMessageCount, pendingReportCount, recentUsers, recentMessages, pendingReports] = await Promise.all([
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const weekAgo = new Date()
+    weekAgo.setDate(weekAgo.getDate() - 7)
+
+    const [
+      userCount,
+      messageCount,
+      unreadMessageCount,
+      pendingReportCount,
+      messagesToday,
+      usersToday,
+      readMessageCount,
+      suspendedUserCount,
+      messagesThisWeek,
+      totalCredits,
+      deletedMessageCount,
+      recentUsers,
+      recentMessages,
+      pendingReports
+    ] = await Promise.all([
       db.user.count(),
       db.message.count(),
       db.message.count({ where: { isRead: false } }),
       db.report.count({ where: { status: 'pending' } }),
+      db.message.count({ where: { createdAt: { gte: today } } }),
+      db.user.count({ where: { createdAt: { gte: today } } }),
+      db.message.count({ where: { isRead: true } }),
+      db.user.count({ where: { suspended: true } }),
+      db.message.count({ where: { createdAt: { gte: weekAgo } } }),
+      db.user.aggregate({ _sum: { credits: true } }),
+      db.message.count({ where: { isDeleted: true } }),
       db.user.findMany({
         orderBy: { createdAt: 'desc' },
         take: 10,
@@ -71,6 +98,13 @@ export async function GET() {
         messages: messageCount,
         unreadMessages: unreadMessageCount,
         pendingReports: pendingReportCount,
+        messagesToday,
+        usersToday,
+        readRate: messageCount > 0 ? Math.round((readMessageCount / messageCount) * 100) : 0,
+        suspendedUsers: suspendedUserCount,
+        messagesThisWeek,
+        totalCredits: totalCredits._sum.credits || 0,
+        deletedMessages: deletedMessageCount,
       },
       recentUsers,
       recentMessages,

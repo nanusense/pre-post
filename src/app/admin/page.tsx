@@ -50,6 +50,13 @@ interface Stats {
   messages: number
   unreadMessages: number
   pendingReports: number
+  messagesToday: number
+  usersToday: number
+  readRate: number
+  suspendedUsers: number
+  messagesThisWeek: number
+  totalCredits: number
+  deletedMessages: number
 }
 
 interface AdminData {
@@ -142,22 +149,54 @@ export default function AdminPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
-        <div className="p-4 border border-gray-200 rounded-lg">
-          <p className="text-sm text-gray-500">Total Users</p>
-          <p className="text-2xl font-semibold">{data.stats.users}</p>
+      <div className="grid grid-cols-4 gap-4 mb-4">
+        <div className="p-4 rounded-lg bg-blue-50">
+          <p className="text-sm text-blue-700">Total Users</p>
+          <p className="text-2xl font-semibold text-blue-900">{data.stats.users}</p>
         </div>
-        <div className="p-4 border border-gray-200 rounded-lg">
-          <p className="text-sm text-gray-500">Total Messages</p>
-          <p className="text-2xl font-semibold">{data.stats.messages}</p>
+        <div className="p-4 rounded-lg bg-sky-50">
+          <p className="text-sm text-sky-700">Total Messages</p>
+          <p className="text-2xl font-semibold text-sky-900">{data.stats.messages}</p>
         </div>
-        <div className="p-4 border border-gray-200 rounded-lg">
-          <p className="text-sm text-gray-500">Unread Messages</p>
-          <p className="text-2xl font-semibold">{data.stats.unreadMessages}</p>
+        <div className="p-4 rounded-lg bg-amber-50">
+          <p className="text-sm text-amber-700">Unread Messages</p>
+          <p className="text-2xl font-semibold text-amber-900">{data.stats.unreadMessages}</p>
         </div>
-        <div className="p-4 border border-gray-200 rounded-lg">
-          <p className="text-sm text-gray-500">Pending Reports</p>
-          <p className="text-2xl font-semibold text-red-600">{data.stats.pendingReports}</p>
+        <div className="p-4 rounded-lg bg-red-50">
+          <p className="text-sm text-red-700">Pending Reports</p>
+          <p className="text-2xl font-semibold text-red-900">{data.stats.pendingReports}</p>
+        </div>
+      </div>
+      <div className="grid grid-cols-4 gap-4 mb-4">
+        <div className="p-4 rounded-lg bg-green-50">
+          <p className="text-sm text-green-700">Messages Today</p>
+          <p className="text-2xl font-semibold text-green-900">{data.stats.messagesToday}</p>
+        </div>
+        <div className="p-4 rounded-lg bg-emerald-50">
+          <p className="text-sm text-emerald-700">New Users Today</p>
+          <p className="text-2xl font-semibold text-emerald-900">{data.stats.usersToday}</p>
+        </div>
+        <div className="p-4 rounded-lg bg-violet-50">
+          <p className="text-sm text-violet-700">Read Rate</p>
+          <p className="text-2xl font-semibold text-violet-900">{data.stats.readRate}%</p>
+        </div>
+        <div className="p-4 rounded-lg bg-red-50">
+          <p className="text-sm text-red-700">Suspended Users</p>
+          <p className="text-2xl font-semibold text-red-900">{data.stats.suspendedUsers}</p>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="p-4 rounded-lg bg-teal-50">
+          <p className="text-sm text-teal-700">Messages This Week</p>
+          <p className="text-2xl font-semibold text-teal-900">{data.stats.messagesThisWeek}</p>
+        </div>
+        <div className="p-4 rounded-lg bg-yellow-50">
+          <p className="text-sm text-yellow-700">Total Credits</p>
+          <p className="text-2xl font-semibold text-yellow-900">{data.stats.totalCredits}</p>
+        </div>
+        <div className="p-4 rounded-lg bg-gray-100">
+          <p className="text-sm text-gray-600">Deleted Messages</p>
+          <p className="text-2xl font-semibold text-gray-900">{data.stats.deletedMessages}</p>
         </div>
       </div>
 

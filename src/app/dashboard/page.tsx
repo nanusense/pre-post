@@ -40,10 +40,10 @@ export default async function DashboardPage() {
         {/* Main action */}
         <Link
           href="/write"
-          className="block w-full p-6 bg-green-100 rounded-lg hover:bg-green-200 transition-colors mb-4"
+          className="block w-full p-6 bg-[#DDE3D5] rounded-lg hover:bg-[#CDD3C5] transition-colors mb-4"
         >
-          <p className="text-lg font-medium text-green-900">Write a Message</p>
-          <p className="text-sm text-green-700 mt-1">
+          <p className="text-lg font-medium text-gray-900">Write a Message</p>
+          <p className="text-sm text-gray-800 mt-1">
             You have {user.credits} credit{user.credits !== 1 ? 's' : ''}
           </p>
         </Link>
