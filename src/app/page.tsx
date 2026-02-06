@@ -33,7 +33,7 @@ export default async function HomePage() {
           One message. Anonymous. Say it before it&apos;s too late.
         </h1>
         <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-          Send anonymous, heartfelt messages to people you care about.
+          Tell someone what they mean to you, without them knowing it&apos;s you.
           Before you can read, you must write. That&apos;s how kindness spreads.
         </p>
 
@@ -65,10 +65,10 @@ export default async function HomePage() {
             <div className="flex gap-4 items-start">
               <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center font-medium flex-shrink-0">1</div>
               <div>
-                <h3 className="font-medium mb-1">Write from the heart</h3>
+                <h3 className="font-medium mb-1">Write your message</h3>
                 <p className="text-gray-600">
                   Think of someone who matters to you. Write them a message you&apos;ve
-                  never had the courage to say. It&apos;s completely anonymous.
+                  never had the courage to say. It stays completely anonymous.
                 </p>
                 <p className="text-gray-300 mt-2">↓</p>
               </div>
@@ -79,7 +79,7 @@ export default async function HomePage() {
               <div>
                 <h3 className="font-medium mb-1">They get notified</h3>
                 <p className="text-gray-600">
-                  The recipient receives an email saying someone wrote them a
+                  They receive an email from Pre-Post saying someone wrote them a
                   message. They won&apos;t know it&apos;s from you.
                 </p>
                 <p className="text-gray-300 mt-2">↓</p>
@@ -91,8 +91,10 @@ export default async function HomePage() {
               <div>
                 <h3 className="font-medium mb-1">Pay it forward</h3>
                 <p className="text-gray-600">
-                  You earn credits by writing messages. You spend credits to read messages.
-                  One write = one read. That&apos;s the pay-it-forward model.
+                  To read a message, you need 1 credit. To earn a credit, write a message.
+                </p>
+                <p className="text-gray-600 font-medium">
+                  Simple: give one, get one.
                 </p>
               </div>
             </div>
