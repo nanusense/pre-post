@@ -3,22 +3,38 @@ import Link from 'next/link'
 import { getCurrentUser, isAdmin } from '@/lib/auth'
 import { db } from '@/lib/db'
 import Header from '@/components/Header'
+import Pagination from '@/components/Pagination'
 
-export default async function SentPage() {
+const PAGE_SIZE = 20
+
+export default async function SentPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>
+}) {
   const user = await getCurrentUser()
 
   if (!user) {
     redirect('/login')
   }
 
-  const messages = await db.message.findMany({
-    where: {
-      senderId: user.id,
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  })
+  const params = await searchParams
+  const page = Math.max(1, Number(params.page) || 1)
+  const skip = (page - 1) * PAGE_SIZE
+
+  const where = { senderId: user.id }
+
+  const [messages, totalCount] = await Promise.all([
+    db.message.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+      skip,
+      take: PAGE_SIZE,
+    }),
+    db.message.count({ where }),
+  ])
+
+  const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE))
 
   return (
     <>
@@ -32,7 +48,7 @@ export default async function SentPage() {
 
         <h1 className="text-2xl font-semibold mb-6">Sent Messages</h1>
 
-        {messages.length === 0 ? (
+        {totalCount === 0 ? (
           <div className="text-center py-8">
             <p className="text-gray-500 mb-4">You haven&apos;t sent any messages yet</p>
             <Link
@@ -45,7 +61,7 @@ export default async function SentPage() {
         ) : (
           <div className="space-y-2">
             {messages.map((message, index) => {
-              const messageNumber = String(messages.length - index).padStart(3, '0')
+              const messageNumber = String(totalCount - skip - index).padStart(3, '0')
               const messageDate = new Date(message.createdAt)
               const now = new Date()
               const diffMs = now.getTime() - messageDate.getTime()
@@ -97,6 +113,8 @@ export default async function SentPage() {
             })}
           </div>
         )}
+
+        <Pagination currentPage={page} totalPages={totalPages} basePath="/sent" />
       </main>
     </>
   )
