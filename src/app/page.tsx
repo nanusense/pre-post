@@ -151,7 +151,7 @@ export default async function HomePage() {
       <footer className="border-t border-gray-200">
         <div className="max-w-2xl mx-auto px-4 py-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-            <span>Pre-Post</span>
+            <span>&copy; Pre-Post</span>
             <nav className="flex gap-6">
               <Link href="/why" className="hover:text-gray-700">Why</Link>
               <Link href="/how" className="hover:text-gray-700">How to Write</Link>
