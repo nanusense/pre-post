@@ -84,8 +84,7 @@ export default async function WhyPage() {
 
           <h2 className="text-xl font-semibold mt-8 mb-4">One message, one person</h2>
           <p className="text-gray-600 mb-4">
-            You can only send one message per person. This isn&apos;t a limitation,
-            it&apos;s liberation.
+            You can only send one message per person. This isn&apos;t a constraint, it&apos;s clarity.
           </p>
           <p className="text-gray-600 mb-4">
             When you know this is your only chance to say something to them,
