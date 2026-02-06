@@ -76,7 +76,7 @@ export default function MessageForm() {
           type="text"
           value={recipientName}
           onChange={(e) => setRecipientName(e.target.value)}
-          placeholder="What do you call them?"
+          placeholder="The person on your mind"
           required
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
         />
@@ -105,7 +105,7 @@ export default function MessageForm() {
           id="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="Write from the heart..."
+          placeholder="Say what you've always meant to..."
           required
           rows={8}
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none"
@@ -115,13 +115,15 @@ export default function MessageForm() {
         </p>
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full px-4 py-3 bg-black text-white rounded-lg font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {loading ? 'Sending...' : 'Send Message'}
-      </button>
+      <div className="flex justify-end">
+        <button
+          type="submit"
+          disabled={loading}
+          className="px-6 py-2 bg-[#DDE3D5] text-gray-900 rounded-lg font-medium hover:bg-[#CDD3C5] disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading ? 'Sending...' : 'Send Message'}
+        </button>
+      </div>
     </form>
   )
 }
