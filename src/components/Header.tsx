@@ -30,6 +30,14 @@ export default function Header({ user }: HeaderProps) {
         <nav className="flex items-center gap-4">
           {user ? (
             <>
+              {user.isAdmin && (
+                <Link
+                  href="/admin"
+                  className="text-sm text-gray-600 hover:text-black"
+                >
+                  Admin
+                </Link>
+              )}
               <span className={`text-sm px-3 py-1 rounded-full ${
                   user.credits === 0
                     ? 'bg-red-100 text-red-800'
@@ -43,14 +51,6 @@ export default function Header({ user }: HeaderProps) {
               >
                 Dashboard
               </Link>
-              {user.isAdmin && (
-                <Link
-                  href="/admin"
-                  className="text-sm text-gray-600 hover:text-black"
-                >
-                  Admin
-                </Link>
-              )}
               <button
                 onClick={handleLogout}
                 className="text-sm text-gray-600 hover:text-black"
