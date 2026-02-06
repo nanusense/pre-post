@@ -12,7 +12,7 @@ export default function SuccessMessage() {
     if (sent === 'true') {
       setShow(true)
       // Auto-hide after 5 seconds
-      const timer = setTimeout(() => setShow(false), 5000)
+      const timer = setTimeout(() => setShow(false), 10000)
       return () => clearTimeout(timer)
     }
   }, [sent])
