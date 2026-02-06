@@ -149,7 +149,7 @@ export default async function WhyPage() {
             </p>
             <Link
               href={user ? '/write' : '/login'}
-              className="inline-block px-6 py-3 bg-black text-white rounded-lg font-medium hover:bg-gray-800"
+              className="inline-block px-6 py-3 bg-[#DDE3D5] text-gray-900 rounded-lg font-medium hover:bg-[#CDD3C5]"
             >
               Write to them now
             </Link>
