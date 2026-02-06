@@ -36,7 +36,7 @@ export async function sendMagicLinkEmail(email: string, token: string, isNewUser
         <p style="font-size: 16px; color: #444; margin-bottom: 24px;">
           Click below to sign in and get started. This link expires in 15 minutes.
         </p>
-        <a href="${magicLink}" style="display: inline-block; background: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500;">
+        <a href="${magicLink}" style="display: inline-block; background: #2563EB; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500;">
           Sign In to Pre-Post
         </a>
         <p style="font-size: 14px; color: #666; margin-top: 32px;">
@@ -50,7 +50,7 @@ export async function sendMagicLinkEmail(email: string, token: string, isNewUser
         <p style="font-size: 16px; color: #444; margin-bottom: 24px;">
           Click the button below to sign in. This link expires in 15 minutes.
         </p>
-        <a href="${magicLink}" style="display: inline-block; background: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500;">
+        <a href="${magicLink}" style="display: inline-block; background: #2563EB; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500;">
           Sign In
         </a>
         <p style="font-size: 14px; color: #666; margin-top: 32px;">
@@ -119,7 +119,7 @@ export async function sendNewMessageNotification(recipientEmail: string, recipie
           </p>
         </div>
 
-        <a href="${APP_URL}/login" style="display: inline-block; background: #7c3aed; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+        <a href="${APP_URL}/login" style="display: inline-block; background: #2563EB; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
           Read Your Message
         </a>
 
@@ -172,7 +172,7 @@ export async function sendWelcomeEmail(email: string) {
           <strong>Start by writing your first message.</strong> Think of someone who's made a difference in your life. Say what you've never said.
         </p>
 
-        <a href="${APP_URL}/write" style="display: inline-block; background: #000; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+        <a href="${APP_URL}/write" style="display: inline-block; background: #2563EB; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
           Write Your First Message
         </a>
 
