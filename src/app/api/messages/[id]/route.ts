@@ -24,6 +24,11 @@ export async function GET(
       return NextResponse.json({ error: 'Message not found' }, { status: 404 })
     }
 
+    // If viewer is the sender, return message directly (no credit spending, no marking as read)
+    if (message.senderId === user.id) {
+      return NextResponse.json({ message, isSender: true })
+    }
+
     // Check if user is the recipient
     if (message.recipientId !== user.id) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
@@ -31,7 +36,7 @@ export async function GET(
 
     // If already read, return message without spending credit
     if (message.isRead) {
-      return NextResponse.json({ message })
+      return NextResponse.json({ message, isSender: false })
     }
 
     // Check credits
@@ -53,7 +58,7 @@ export async function GET(
       },
     })
 
-    return NextResponse.json({ message: updatedMessage, creditSpent: true })
+    return NextResponse.json({ message: updatedMessage, creditSpent: true, isSender: false })
   } catch (error) {
     console.error('Read message error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

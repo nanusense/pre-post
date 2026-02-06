@@ -89,9 +89,10 @@ export default async function SentPage({
               const date = relativeTime ? `${relativeTime} · ${formattedDate}` : formattedDate
 
               return (
-                <div
+                <Link
                   key={message.id}
-                  className="p-4 rounded-lg bg-sky-50"
+                  href={`/message/${message.id}`}
+                  className="block p-4 rounded-lg bg-sky-50 hover:bg-sky-100 transition-colors"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-medium">PP ↑{messageNumber}</span>
@@ -108,7 +109,7 @@ export default async function SentPage({
                       <span className="text-xs text-gray-400">Not yet read</span>
                     )}
                   </div>
-                </div>
+                </Link>
               )
             })}
           </div>

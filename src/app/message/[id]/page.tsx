@@ -18,6 +18,7 @@ export default function MessagePage() {
   const messageId = params.id as string
 
   const [message, setMessage] = useState<Message | null>(null)
+  const [isSender, setIsSender] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [needsCredits, setNeedsCredits] = useState(false)
@@ -49,6 +50,7 @@ export default function MessagePage() {
       }
 
       setMessage(data.message)
+      setIsSender(data.isSender === true)
     } catch {
       setError('Failed to load message')
     } finally {
@@ -180,15 +182,19 @@ export default function MessagePage() {
   return (
     <main className="max-w-2xl mx-auto px-4 py-8">
       <div className="mb-6">
-        <Link href="/inbox" className="text-sm text-gray-500 hover:text-gray-700">
-          &larr; Back to inbox
+        <Link href={isSender ? '/sent' : '/inbox'} className="text-sm text-gray-500 hover:text-gray-700">
+          &larr; {isSender ? 'Back to sent' : 'Back to inbox'}
         </Link>
       </div>
 
       <article className="prose prose-gray max-w-none">
         <header className="mb-8 pb-6 border-b border-gray-200">
           <p className="text-gray-500 text-sm mb-2">
-            Written for <span className="font-medium text-gray-900">{message.recipientName}</span>
+            {isSender ? (
+              <>To: <span className="font-medium text-gray-900">{message.recipientName}</span></>
+            ) : (
+              <>Written for <span className="font-medium text-gray-900">{message.recipientName}</span></>
+            )}
           </p>
           <time className="text-sm text-gray-400">{formattedDate} at {formattedTime}</time>
         </header>
@@ -198,35 +204,37 @@ export default function MessagePage() {
         </div>
       </article>
 
-      <footer className="mt-12 pt-6 border-t border-gray-200">
-        <p className="text-sm text-gray-500 mb-4">
-          This message was written anonymously. You will never know who sent it.
-        </p>
+      {!isSender && (
+        <footer className="mt-12 pt-6 border-t border-gray-200">
+          <p className="text-sm text-gray-500 mb-4">
+            This message was written anonymously. You will never know who sent it.
+          </p>
 
-        <div className="flex items-center gap-4 mb-6">
-          <button
-            onClick={() => setShowReportModal(true)}
-            disabled={reported}
-            className="text-sm text-red-600 hover:text-red-800 disabled:text-gray-400"
-          >
-            {reported ? 'Reported' : 'Report abuse'}
-          </button>
-          <button
-            onClick={handleDelete}
-            disabled={deleting}
-            className="text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50"
-          >
-            {deleting ? 'Deleting...' : 'Delete message'}
-          </button>
-        </div>
+          <div className="flex items-center gap-4 mb-6">
+            <button
+              onClick={() => setShowReportModal(true)}
+              disabled={reported}
+              className="text-sm text-red-600 hover:text-red-800 disabled:text-gray-400"
+            >
+              {reported ? 'Reported' : 'Report abuse'}
+            </button>
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50"
+            >
+              {deleting ? 'Deleting...' : 'Delete message'}
+            </button>
+          </div>
 
-        <Link
-          href="/write"
-          className="inline-block text-sm text-black underline hover:no-underline"
-        >
-          Pay it forward - write a message to someone you care about
-        </Link>
-      </footer>
+          <Link
+            href="/write"
+            className="inline-block text-sm text-black underline hover:no-underline"
+          >
+            Pay it forward - write a message to someone you care about
+          </Link>
+        </footer>
+      )}
 
       {/* Report Modal */}
       {showReportModal && (
