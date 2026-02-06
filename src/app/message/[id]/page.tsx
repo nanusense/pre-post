@@ -165,11 +165,16 @@ export default function MessagePage() {
     return null
   }
 
-  const formattedDate = new Date(message.createdAt).toLocaleDateString('en-US', {
+  const messageDate = new Date(message.createdAt)
+  const formattedDate = messageDate.toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
     year: 'numeric',
+  })
+  const formattedTime = messageDate.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
   })
 
   return (
@@ -185,7 +190,7 @@ export default function MessagePage() {
           <p className="text-gray-500 text-sm mb-2">
             Written for <span className="font-medium text-gray-900">{message.recipientName}</span>
           </p>
-          <time className="text-sm text-gray-400">{formattedDate}</time>
+          <time className="text-sm text-gray-400">{formattedDate} at {formattedTime}</time>
         </header>
 
         <div className="whitespace-pre-wrap text-gray-800 leading-relaxed">

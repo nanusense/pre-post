@@ -25,6 +25,7 @@ export default async function WritePage() {
         <p className="text-gray-600 mb-8">
           Send an anonymous message to someone you care about.
           You&apos;ll earn 1 credit when you send it.
+          You can only send one message per person, so make it count.
         </p>
 
         <MessageForm />

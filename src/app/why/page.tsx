@@ -51,6 +51,9 @@ export default async function WhyPage() {
             Pre-Post exists so you don&apos;t have to wait. Say it now, while they can
             still read it.
           </p>
+          <p className="text-gray-800 font-medium mb-4">
+            Say it pre, not post.
+          </p>
 
           <h2 className="text-xl font-semibold mt-8 mb-4">Why anonymity matters</h2>
           <p className="text-gray-600 mb-4">

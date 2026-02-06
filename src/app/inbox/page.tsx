@@ -91,8 +91,8 @@ export default async function InboxPage() {
                   href={`/message/${message.id}`}
                   className={`block p-4 rounded-lg transition-colors ${
                     message.isRead
-                      ? 'bg-emerald-50 hover:bg-emerald-100'
-                      : 'bg-amber-50 hover:bg-amber-100'
+                      ? 'bg-gray-100 hover:bg-gray-200'
+                      : 'bg-red-50 hover:bg-red-100'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -101,7 +101,7 @@ export default async function InboxPage() {
                         <span className="w-2 h-2 bg-black rounded-full"></span>
                       )}
                       <span className={message.isRead ? 'text-gray-600' : 'font-medium'}>
-                        Pre-Post {messageNumber} {message.isRead ? '(read)' : '(received)'}
+                        Pre-Post ↓{messageNumber} {message.isRead ? '(read)' : '(received)'}
                       </span>
                     </div>
                     <span className="text-sm text-gray-500">{date}</span>

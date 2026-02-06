@@ -44,28 +44,50 @@ export default async function SentPage() {
           </div>
         ) : (
           <div className="space-y-2">
-            {messages.map((message) => {
-              const date = new Date(message.createdAt).toLocaleDateString('en-US', {
+            {messages.map((message, index) => {
+              const messageNumber = String(messages.length - index).padStart(3, '0')
+              const messageDate = new Date(message.createdAt)
+              const now = new Date()
+              const diffMs = now.getTime() - messageDate.getTime()
+              const diffMins = Math.floor(diffMs / 60000)
+              const diffHours = Math.floor(diffMs / 3600000)
+              const diffDays = Math.floor(diffMs / 86400000)
+
+              const formattedDate = messageDate.toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
+                year: messageDate.getFullYear() !== now.getFullYear() ? 'numeric' : undefined,
               })
+
+              let relativeTime: string
+              if (diffMins < 60) {
+                relativeTime = diffMins <= 1 ? 'Just now' : `${diffMins} mins ago`
+              } else if (diffHours < 24) {
+                relativeTime = diffHours === 1 ? '1 hour ago' : `${diffHours} hours ago`
+              } else if (diffDays < 7) {
+                relativeTime = diffDays === 1 ? 'Yesterday' : `${diffDays} days ago`
+              } else {
+                relativeTime = ''
+              }
+
+              const date = relativeTime ? `${relativeTime} · ${formattedDate}` : formattedDate
 
               return (
                 <div
                   key={message.id}
-                  className="p-4 rounded-lg border border-gray-200 bg-white"
+                  className="p-4 rounded-lg bg-sky-50"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium">To: {message.recipientName}</span>
-                    <span className="text-sm text-gray-400">{date}</span>
+                    <span className="font-medium">Pre-Post ↑{messageNumber}</span>
+                    <span className="text-sm text-gray-500">{date}</span>
                   </div>
-                  <p className="text-sm text-gray-500">{message.recipientEmail}</p>
+                  <p className="text-sm text-gray-600">To: {message.recipientName} ({message.recipientEmail})</p>
                   <p className="text-sm text-gray-600 mt-2 line-clamp-2">
                     {message.content.slice(0, 120)}...
                   </p>
                   <div className="mt-2">
                     {message.isRead ? (
-                      <span className="text-xs text-green-600">Read</span>
+                      <span className="text-xs text-green-600">Read by recipient</span>
                     ) : (
                       <span className="text-xs text-gray-400">Not yet read</span>
                     )}
