@@ -34,7 +34,7 @@ export default async function HomePage() {
           Before you can read, you must write. That&apos;s how kindness spreads.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-row gap-4">
           <Link
             href={user ? '/write' : '/login'}
             className="inline-block px-6 py-3 bg-[#DDE3D5] text-gray-900 text-center rounded-lg font-medium hover:bg-[#CDD3C5]"
