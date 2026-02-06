@@ -102,9 +102,8 @@ export default async function WhyPage() {
             more meaningful to the recipient. They know you can&apos;t unsay it.
           </p>
 
-          <h2 className="text-xl font-semibold mt-12 mb-6">Frequently asked questions</h2>
-
-          <div className="bg-gray-50 rounded-lg p-6">
+          <div className="bg-gray-50 rounded-lg p-6 mt-12">
+            <h2 className="text-xl font-semibold mb-6">Frequently asked questions</h2>
             <div className="space-y-6">
               <div>
                 <h3 className="font-medium mb-2">Will the recipient know it&apos;s from me?</h3>
