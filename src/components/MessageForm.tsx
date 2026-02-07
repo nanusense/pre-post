@@ -111,7 +111,7 @@ export default function MessageForm() {
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none"
         />
         <p className="mt-1 text-sm text-gray-500">
-          This message is permanent and anonymous. They will never know it&apos;s from you.
+          This message is permanent and anonymous. They will never know it&apos;s from you. Not even admins can read it.
         </p>
       </div>
 
