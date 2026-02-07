@@ -16,7 +16,7 @@ function LoginForm() {
   const [email, setEmail] = useState('')
   const [company, setCompany] = useState('')
   const [loading, setLoading] = useState(false)
-  const [sent, setSent] = useState(false)
+  const [sent, setSent] = useState('')
   const [error, setError] = useState('')
   const [devLink, setDevLink] = useState('')
 
@@ -42,7 +42,7 @@ function LoginForm() {
         return
       }
 
-      setSent(true)
+      setSent(data.message)
       if (data.devMagicLink) {
         setDevLink(data.devMagicLink)
       }
@@ -58,7 +58,7 @@ function LoginForm() {
       <div className="w-full max-w-sm text-center">
         <h1 className="text-2xl font-semibold mb-4">Check your email</h1>
         <p className="text-gray-600 mb-6">
-          We sent a login link to <strong>{email}</strong>
+          {sent}
         </p>
         {devLink && (
           <div className="mt-4 p-4 bg-gray-100 rounded-lg text-sm">
@@ -69,7 +69,7 @@ function LoginForm() {
           </div>
         )}
         <button
-          onClick={() => setSent(false)}
+          onClick={() => setSent('')}
           className="mt-6 text-gray-500 hover:text-gray-700"
         >
           Use a different email

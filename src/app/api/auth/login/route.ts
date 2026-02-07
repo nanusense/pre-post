@@ -37,8 +37,7 @@ export async function POST(request: NextRequest) {
     })
 
     if (existingLink) {
-      // Return success to avoid leaking whether a link was already sent
-      return NextResponse.json({ success: true, message: 'Check your email for the login link' })
+      return NextResponse.json({ success: true, message: 'We already sent you a link — check your inbox or spam folder' })
     }
 
     // Generate magic link token
