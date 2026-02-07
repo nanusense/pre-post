@@ -13,26 +13,12 @@ export async function POST(request: NextRequest) {
 
     const normalizedEmail = email.toLowerCase().trim()
 
-    // Create or get user
-    let user = await db.user.findUnique({
+    // Look up existing user (don't create if missing — user creation is deferred to verify)
+    const user = await db.user.findUnique({
       where: { email: normalizedEmail },
     })
 
-    let isNewUser = false
-    if (!user) {
-      user = await db.user.create({
-        data: { email: normalizedEmail },
-      })
-      isNewUser = true
-
-      // Link any messages that were sent to this email
-      await db.message.updateMany({
-        where: { recipientEmail: normalizedEmail, recipientId: null },
-        data: { recipientId: user.id },
-      })
-    }
-
-    if (user.suspended) {
+    if (user?.suspended) {
       return NextResponse.json({ error: 'Account suspended' }, { status: 403 })
     }
 
@@ -45,12 +31,12 @@ export async function POST(request: NextRequest) {
         email: normalizedEmail,
         token,
         expiresAt,
-        userId: user.id,
+        userId: user?.id ?? null,
       },
     })
 
-    // Send email
-    const result = await sendMagicLinkEmail(normalizedEmail, token, isNewUser)
+    // Send email (always use standard login template; welcome email is sent after verify)
+    const result = await sendMagicLinkEmail(normalizedEmail, token)
 
     if (!result.success) {
       return NextResponse.json(
