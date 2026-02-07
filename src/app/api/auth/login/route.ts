@@ -22,6 +22,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Account suspended' }, { status: 403 })
     }
 
+    // Rate limit: skip sending if there's already an unused, unexpired magic link for this email
+    const existingLink = await db.magicLink.findFirst({
+      where: {
+        email: normalizedEmail,
+        used: false,
+        expiresAt: { gt: new Date() },
+      },
+    })
+
+    if (existingLink) {
+      // Return success to avoid leaking whether a link was already sent
+      return NextResponse.json({ success: true, message: 'Check your email for the login link' })
+    }
+
     // Generate magic link token
     const token = randomBytes(32).toString('hex')
     const expiresAt = new Date(Date.now() + 15 * 60 * 1000) // 15 minutes
