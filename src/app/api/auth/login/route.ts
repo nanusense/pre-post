@@ -5,7 +5,12 @@ import { sendMagicLinkEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json()
+    const { email, company } = await request.json()
+
+    // Honeypot: if the hidden field is filled, silently reject
+    if (company) {
+      return NextResponse.json({ success: true, message: 'Check your email for the login link' })
+    }
 
     if (!email || typeof email !== 'string') {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 })

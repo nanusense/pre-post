@@ -14,6 +14,7 @@ const errorMessages: Record<string, string> = {
 
 function LoginForm() {
   const [email, setEmail] = useState('')
+  const [company, setCompany] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
@@ -31,7 +32,7 @@ function LoginForm() {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, company }),
       })
 
       const data = await res.json()
@@ -94,6 +95,15 @@ function LoginForm() {
       )}
 
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute opacity-0 h-0 w-0 overflow-hidden pointer-events-none"
+        />
         <input
           type="email"
           value={email}
