@@ -110,7 +110,7 @@ export default async function HomePage() {
             </li>
             <li className="flex gap-2">
               <span className="text-black">&#10003;</span>
-              <span>What you write stays between sender and recipient. Period.</span>
+              <span>What you write stays between sender and recipient. Not even admins can access your messages.</span>
             </li>
             <li className="flex gap-2">
               <span className="text-black">&#10003;</span>
