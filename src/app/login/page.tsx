@@ -85,7 +85,7 @@ function LoginForm() {
         Enter your email to receive a magic link
       </p>
       <p className="text-gray-400 text-sm mb-6">
-        No password needed. We&apos;ll email you a secure link to sign in.
+        No password needed. You&apos;ll receive a secure sign-in link valid for 15 minutes. If it doesn&apos;t arrive, check your spam folder.
       </p>
 
       {(errorParam || error) && (
