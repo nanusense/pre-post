@@ -62,13 +62,13 @@ export default function MessageForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="p-3 bg-red-50 text-red-700 rounded-lg text-sm">
+        <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 rounded-lg text-sm">
           {error}
         </div>
       )}
 
       <div>
-        <label htmlFor="recipientName" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="recipientName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Their name
         </label>
         <input
@@ -78,12 +78,12 @@ export default function MessageForm() {
           onChange={(e) => setRecipientName(e.target.value)}
           placeholder="The person on your mind"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent bg-white dark:bg-gray-800"
         />
       </div>
 
       <div>
-        <label htmlFor="recipientEmail" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="recipientEmail" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Their email
         </label>
         <input
@@ -93,12 +93,12 @@ export default function MessageForm() {
           onChange={(e) => setRecipientEmail(e.target.value)}
           placeholder="they@example.com"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent bg-white dark:bg-gray-800"
         />
       </div>
 
       <div>
-        <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Your message
         </label>
         <textarea
@@ -108,9 +108,9 @@ export default function MessageForm() {
           placeholder="Say what you've always meant to..."
           required
           rows={8}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent resize-none bg-white dark:bg-gray-800"
         />
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           This message is permanent and anonymous. They will never know it&apos;s from you. Not even admins can read it.
         </p>
       </div>
@@ -119,7 +119,7 @@ export default function MessageForm() {
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-2 bg-[#DDE3D5] text-gray-900 rounded-lg font-medium hover:bg-[#CDD3C5] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-2 bg-[#DDE3D5] dark:bg-[#3a4a2f] text-gray-900 dark:text-gray-100 rounded-lg font-medium hover:bg-[#CDD3C5] dark:hover:bg-[#4a5a3f] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? 'Sending...' : 'Send Message'}
         </button>

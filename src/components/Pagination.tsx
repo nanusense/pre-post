@@ -28,23 +28,23 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
       {currentPage > 1 ? (
         <Link
           href={pageHref(currentPage - 1)}
-          className="px-3 py-2 text-sm rounded-lg bg-gray-100 hover:bg-gray-200"
+          className="px-3 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
         >
           Previous
         </Link>
       ) : (
-        <span className="px-3 py-2 text-sm rounded-lg text-gray-300">Previous</span>
+        <span className="px-3 py-2 text-sm rounded-lg text-gray-300 dark:text-gray-600">Previous</span>
       )}
 
       {pages.map((page, idx) =>
         page === -1 ? (
-          <span key={`ellipsis-${idx}`} className="px-2 py-2 text-sm text-gray-400">
+          <span key={`ellipsis-${idx}`} className="px-2 py-2 text-sm text-gray-400 dark:text-gray-500">
             &hellip;
           </span>
         ) : page === currentPage ? (
           <span
             key={page}
-            className="px-3 py-2 text-sm rounded-lg bg-black text-white"
+            className="px-3 py-2 text-sm rounded-lg bg-black dark:bg-white text-white dark:text-black"
           >
             {page}
           </span>
@@ -52,7 +52,7 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
           <Link
             key={page}
             href={pageHref(page)}
-            className="px-3 py-2 text-sm rounded-lg bg-gray-100 hover:bg-gray-200"
+            className="px-3 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
           >
             {page}
           </Link>
@@ -62,12 +62,12 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
       {currentPage < totalPages ? (
         <Link
           href={pageHref(currentPage + 1)}
-          className="px-3 py-2 text-sm rounded-lg bg-gray-100 hover:bg-gray-200"
+          className="px-3 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
         >
           Next
         </Link>
       ) : (
-        <span className="px-3 py-2 text-sm rounded-lg text-gray-300">Next</span>
+        <span className="px-3 py-2 text-sm rounded-lg text-gray-300 dark:text-gray-600">Next</span>
       )}
     </nav>
   )

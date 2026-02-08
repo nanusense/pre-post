@@ -115,7 +115,7 @@ export default function MessagePage() {
   if (loading) {
     return (
       <main className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black dark:border-white"></div>
       </main>
     )
   }
@@ -124,22 +124,22 @@ export default function MessagePage() {
     return (
       <main className="max-w-2xl mx-auto px-4 py-8">
         <div className="mb-6">
-          <Link href="/inbox" className="text-sm text-gray-500 hover:text-gray-700">
+          <Link href="/inbox" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
             &larr; Back to inbox
           </Link>
         </div>
 
         <div className="text-center py-12">
           <h1 className="text-2xl font-semibold mb-4">You need a credit to read this</h1>
-          <p className="text-gray-600 mb-4">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
             1 credit = 1 message you can read.
           </p>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
             Write a message to someone you care about to earn 1 credit.
           </p>
           <Link
             href="/write"
-            className="inline-block px-6 py-3 bg-black text-white rounded-lg font-medium hover:bg-gray-800"
+            className="inline-block px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-200"
           >
             Write a Message
           </Link>
@@ -152,11 +152,11 @@ export default function MessagePage() {
     return (
       <main className="max-w-2xl mx-auto px-4 py-8">
         <div className="mb-6">
-          <Link href="/inbox" className="text-sm text-gray-500 hover:text-gray-700">
+          <Link href="/inbox" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
             &larr; Back to inbox
           </Link>
         </div>
-        <div className="p-4 bg-red-50 text-red-700 rounded-lg">
+        <div className="p-4 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 rounded-lg">
           {error}
         </div>
       </main>
@@ -182,31 +182,31 @@ export default function MessagePage() {
   return (
     <main className="max-w-2xl mx-auto px-4 py-8">
       <div className="mb-6">
-        <Link href={isSender ? '/sent' : '/inbox'} className="text-sm text-gray-500 hover:text-gray-700">
+        <Link href={isSender ? '/sent' : '/inbox'} className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
           &larr; {isSender ? 'Back to sent' : 'Back to inbox'}
         </Link>
       </div>
 
-      <article className="prose prose-gray max-w-none">
-        <header className="mb-8 pb-6 border-b border-gray-200">
-          <p className="text-gray-500 text-sm mb-2">
+      <article className="prose prose-gray dark:prose-invert max-w-none">
+        <header className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">
             {isSender ? (
-              <>To: <span className="font-medium text-gray-900">{message.recipientName}</span></>
+              <>To: <span className="font-medium text-gray-900 dark:text-gray-100">{message.recipientName}</span></>
             ) : (
-              <>Written for <span className="font-medium text-gray-900">{message.recipientName}</span></>
+              <>Written for <span className="font-medium text-gray-900 dark:text-gray-100">{message.recipientName}</span></>
             )}
           </p>
-          <time className="text-sm text-gray-400">{formattedDate} at {formattedTime}</time>
+          <time className="text-sm text-gray-400 dark:text-gray-500">{formattedDate} at {formattedTime}</time>
         </header>
 
-        <div className="whitespace-pre-wrap text-gray-800 leading-relaxed">
+        <div className="whitespace-pre-wrap text-gray-800 dark:text-gray-200 leading-relaxed">
           {message.content}
         </div>
       </article>
 
       {!isSender && (
-        <footer className="mt-12 pt-6 border-t border-gray-200">
-          <p className="text-sm text-gray-500 mb-4">
+        <footer className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
             This message was written anonymously. You will never know who sent it.
           </p>
 
@@ -214,14 +214,14 @@ export default function MessagePage() {
             <button
               onClick={() => setShowReportModal(true)}
               disabled={reported}
-              className="text-sm text-red-600 hover:text-red-800 disabled:text-gray-400"
+              className="text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 disabled:text-gray-400 dark:disabled:text-gray-600"
             >
               {reported ? 'Reported' : 'Report abuse'}
             </button>
             <button
               onClick={handleDelete}
               disabled={deleting}
-              className="text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50"
+              className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 disabled:opacity-50"
             >
               {deleting ? 'Deleting...' : 'Delete message'}
             </button>
@@ -229,7 +229,7 @@ export default function MessagePage() {
 
           <Link
             href="/write"
-            className="inline-block text-sm text-black underline hover:no-underline"
+            className="inline-block text-sm text-black dark:text-gray-100 underline hover:no-underline"
           >
             Pay it forward - write a message to someone you care about
           </Link>
@@ -239,9 +239,9 @@ export default function MessagePage() {
       {/* Report Modal */}
       {showReportModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full">
             <h2 className="text-lg font-semibold mb-4">Report this message</h2>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               Please describe why you&apos;re reporting this message. An admin will review it and see the full message content.
             </p>
             <textarea
@@ -249,7 +249,7 @@ export default function MessagePage() {
               onChange={(e) => setReportReason(e.target.value)}
               placeholder="Reason for reporting..."
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none mb-4"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent resize-none mb-4 bg-white dark:bg-gray-900"
             />
             <div className="flex gap-3">
               <button
@@ -261,7 +261,7 @@ export default function MessagePage() {
               </button>
               <button
                 onClick={() => setShowReportModal(false)}
-                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
               >
                 Cancel
               </button>

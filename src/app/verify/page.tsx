@@ -18,8 +18,8 @@ function VerifyContent() {
 
   return (
     <div className="text-center">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-4"></div>
-      <p className="text-gray-600">Verifying your login...</p>
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
+      <p className="text-gray-600 dark:text-gray-400">Verifying your login...</p>
     </div>
   )
 }
@@ -29,8 +29,8 @@ export default function VerifyPage() {
     <main className="min-h-screen flex flex-col items-center justify-center p-6">
       <Suspense fallback={
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Loading...</p>
         </div>
       }>
         <VerifyContent />

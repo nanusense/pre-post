@@ -41,7 +41,7 @@ export default async function SentPage({
       <Header user={{ email: user.email, credits: user.credits, isAdmin: isAdmin(user.email) }} />
       <main className="max-w-2xl mx-auto px-4 py-8">
         <div className="mb-6">
-          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700">
+          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
             &larr; Back
           </Link>
         </div>
@@ -50,10 +50,10 @@ export default async function SentPage({
 
         {totalCount === 0 ? (
           <div className="text-center py-8">
-            <p className="text-gray-500 mb-4">You haven&apos;t sent any messages yet</p>
+            <p className="text-gray-500 dark:text-gray-400 mb-4">You haven&apos;t sent any messages yet</p>
             <Link
               href="/write"
-              className="inline-block px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800"
+              className="inline-block px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200"
             >
               Write your first message
             </Link>
@@ -92,21 +92,21 @@ export default async function SentPage({
                 <Link
                   key={message.id}
                   href={`/message/${message.id}`}
-                  className="block p-4 rounded-lg bg-sky-50 hover:bg-sky-100 transition-colors"
+                  className="block p-4 rounded-lg bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-100 dark:hover:bg-sky-900/30 transition-colors"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium">PP ↑{messageNumber}</span>
-                    <span className="text-sm text-gray-500">{date}</span>
+                    <span className="font-medium">PP &uarr;{messageNumber}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{date}</span>
                   </div>
-                  <p className="text-sm text-gray-600">To: {message.recipientName} ({message.recipientEmail})</p>
-                  <p className="text-sm text-gray-600 mt-2 line-clamp-2">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">To: {message.recipientName} ({message.recipientEmail})</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-2">
                     {message.content.slice(0, 120)}...
                   </p>
                   <div className="mt-2">
                     {message.isRead ? (
-                      <span className="text-xs text-green-600">Read by recipient</span>
+                      <span className="text-xs text-green-600 dark:text-green-400">Read by recipient</span>
                     ) : (
-                      <span className="text-xs text-gray-400">Not yet read</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500">Not yet read</span>
                     )}
                   </div>
                 </Link>

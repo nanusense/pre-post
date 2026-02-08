@@ -45,7 +45,7 @@ export default async function InboxPage({
       <Header user={{ email: user.email, credits: user.credits, isAdmin: isAdmin(user.email) }} />
       <main className="max-w-2xl mx-auto px-4 py-8">
         <div className="mb-6">
-          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700">
+          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
             &larr; Back
           </Link>
         </div>
@@ -53,15 +53,15 @@ export default async function InboxPage({
         <h1 className="text-2xl font-semibold mb-6">Inbox</h1>
 
         {user.credits < 1 && unreadCount > 0 && (
-          <div className="mb-6 p-4 bg-orange-50 border border-orange-200 rounded-lg">
-            <p className="font-medium text-orange-800 mb-1">You need credits to read messages</p>
-            <p className="text-sm text-orange-700 mb-3">
+          <div className="mb-6 p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg">
+            <p className="font-medium text-orange-800 dark:text-orange-300 mb-1">You need credits to read messages</p>
+            <p className="text-sm text-orange-700 dark:text-orange-400 mb-3">
               You have {unreadCount} unread message{unreadCount !== 1 ? 's' : ''}, so you need {unreadCount} credit{unreadCount !== 1 ? 's' : ''}.
               Write a message to someone to earn 1 credit.
             </p>
             <Link
               href="/write"
-              className="inline-block px-4 py-2 bg-black text-white text-sm rounded-lg hover:bg-gray-800"
+              className="inline-block px-4 py-2 bg-black dark:bg-white text-white dark:text-black text-sm rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200"
             >
               Write a message
             </Link>
@@ -70,8 +70,8 @@ export default async function InboxPage({
 
         {totalCount === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 mb-2">No messages yet</p>
-            <p className="text-sm text-gray-400">Someone might be writing one for you right now!</p>
+            <p className="text-gray-500 dark:text-gray-400 mb-2">No messages yet</p>
+            <p className="text-sm text-gray-400 dark:text-gray-500">Someone might be writing one for you right now!</p>
           </div>
         ) : (
           <div className="space-y-2">
@@ -109,23 +109,23 @@ export default async function InboxPage({
                   href={`/message/${message.id}`}
                   className={`block p-4 rounded-lg transition-colors ${
                     message.isRead
-                      ? 'bg-gray-100 hover:bg-gray-200'
-                      : 'bg-red-50 hover:bg-red-100'
+                      ? 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600'
+                      : 'bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       {!message.isRead && (
-                        <span className="w-2 h-2 bg-black rounded-full"></span>
+                        <span className="w-2 h-2 bg-black dark:bg-white rounded-full"></span>
                       )}
-                      <span className={message.isRead ? 'text-gray-600' : 'font-medium'}>
-                        Pre-Post ↓{messageNumber} {message.isRead ? '(read)' : '(unread)'}
+                      <span className={message.isRead ? 'text-gray-600 dark:text-gray-400' : 'font-medium'}>
+                        Pre-Post &darr;{messageNumber} {message.isRead ? '(read)' : '(unread)'}
                       </span>
                     </div>
-                    <span className="text-sm text-gray-500">{date}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{date}</span>
                   </div>
                   {message.isRead && (
-                    <p className="text-sm text-gray-500 mt-1 truncate pl-5">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 truncate pl-5">
                       {message.content.slice(0, 80)}...
                     </p>
                   )}

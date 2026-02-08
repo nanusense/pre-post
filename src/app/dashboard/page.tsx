@@ -52,9 +52,9 @@ export default async function DashboardPage() {
 
         {/* First-time user prompt */}
         {user.credits === 0 && sentCount === 0 && (
-          <div className="mb-6 p-4 bg-blue-50 border border-blue-100 rounded-lg">
-            <p className="font-medium text-blue-800 mb-1">Getting started</p>
-            <p className="text-sm text-blue-700">
+          <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-lg">
+            <p className="font-medium text-blue-800 dark:text-blue-300 mb-1">Getting started</p>
+            <p className="text-sm text-blue-700 dark:text-blue-400">
               Write your first message to someone who matters to you. Once you send it, you&apos;ll earn 1 credit to read any messages waiting for you.
             </p>
           </div>
@@ -63,10 +63,10 @@ export default async function DashboardPage() {
         {/* Main action */}
         <Link
           href="/write"
-          className="block w-full p-6 bg-[#DDE3D5] rounded-lg hover:bg-[#CDD3C5] transition-colors mb-4"
+          className="block w-full p-6 bg-[#DDE3D5] dark:bg-[#3a4a2f] rounded-lg hover:bg-[#CDD3C5] dark:hover:bg-[#4a5a3f] transition-colors mb-4"
         >
-          <p className="text-lg font-medium text-gray-900">Write a Message</p>
-          <p className="text-sm text-gray-800 mt-1">
+          <p className="text-lg font-medium text-gray-900 dark:text-gray-100">Write a Message</p>
+          <p className="text-sm text-gray-800 dark:text-gray-300 mt-1">
             You have {user.credits} credit{user.credits !== 1 ? 's' : ''}
           </p>
         </Link>
@@ -75,26 +75,26 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-3 gap-4">
           <Link
             href="/inbox"
-            className="p-5 rounded-lg bg-red-50 hover:bg-red-100 transition-colors"
+            className="p-5 rounded-lg bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
           >
-            <p className="text-3xl font-semibold text-red-900">{unreadCount}</p>
-            <p className="text-sm text-red-700 mt-1">Unread</p>
+            <p className="text-3xl font-semibold text-red-900 dark:text-red-300">{unreadCount}</p>
+            <p className="text-sm text-red-700 dark:text-red-400 mt-1">Unread</p>
           </Link>
 
           <Link
             href="/inbox"
-            className="p-5 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="p-5 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
           >
-            <p className="text-3xl font-semibold text-gray-900">{readCount}</p>
-            <p className="text-sm text-gray-600 mt-1">Read</p>
+            <p className="text-3xl font-semibold text-gray-900 dark:text-gray-100">{readCount}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Read</p>
           </Link>
 
           <Link
             href="/sent"
-            className="p-5 rounded-lg bg-sky-50 hover:bg-sky-100 transition-colors"
+            className="p-5 rounded-lg bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-100 dark:hover:bg-sky-900/30 transition-colors"
           >
-            <p className="text-3xl font-semibold text-sky-900">{sentCount}</p>
-            <p className="text-sm text-sky-700 mt-1">Sent</p>
+            <p className="text-3xl font-semibold text-sky-900 dark:text-sky-300">{sentCount}</p>
+            <p className="text-sm text-sky-700 dark:text-sky-400 mt-1">Sent</p>
           </Link>
         </div>
       </main>
