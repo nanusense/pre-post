@@ -26,44 +26,45 @@ export async function sendMagicLinkEmail(email: string, token: string, isNewUser
   const html = isNewUser
     ? `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Welcome to Pre-Post</h1>
-        <p style="font-size: 16px; color: #444; margin-bottom: 16px;">
-          Pre-Post is a place for anonymous, meaningful messages. People use it to say things they've never had the courage to say – thank yous, appreciations, and words that matter.
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">Welcome to Pre-Post!</p>
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          Pre-Post is a place for anonymous, meaningful messages. People use it to say things they've never had the courage to say.
         </p>
-        <p style="font-size: 16px; color: #444; margin-bottom: 16px;">
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
           Someone may have already written something for you. To read it, you'll first need to pay it forward by writing a message to someone you care about.
         </p>
-        <p style="font-size: 16px; color: #444; margin-bottom: 24px;">
-          Click below to sign in and get started. This link expires in 15 minutes.
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          Sign in here (link expires in 15 minutes): <a href="${magicLink}">${magicLink}</a>
         </p>
-        <a href="${magicLink}" style="display: inline-block; background: #2563EB; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500;">
-          Sign In to Pre-Post
-        </a>
-        <p style="font-size: 14px; color: #666; margin-top: 32px;">
+        <p style="font-size: 14px; color: #999; margin-top: 32px;">
           If you didn't request this email, you can safely ignore it.
         </p>
       </div>
     `
     : `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Sign in to Pre-Post</h1>
-        <p style="font-size: 16px; color: #444; margin-bottom: 24px;">
-          Click the button below to sign in. This link expires in 15 minutes.
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          Here's your sign-in link for Pre-Post. It expires in 15 minutes.
         </p>
-        <a href="${magicLink}" style="display: inline-block; background: #2563EB; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 500;">
-          Sign In
-        </a>
-        <p style="font-size: 14px; color: #666; margin-top: 32px;">
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          <a href="${magicLink}">${magicLink}</a>
+        </p>
+        <p style="font-size: 14px; color: #999; margin-top: 32px;">
           If you didn't request this email, you can safely ignore it.
         </p>
       </div>
     `
+
+  const text = isNewUser
+    ? `Welcome to Pre-Post!\n\nPre-Post is a place for anonymous, meaningful messages. People use it to say things they've never had the courage to say.\n\nSomeone may have already written something for you. To read it, you'll first need to pay it forward by writing a message to someone you care about.\n\nSign in here (link expires in 15 minutes): ${magicLink}\n\nIf you didn't request this email, you can safely ignore it.`
+    : `Here's your sign-in link for Pre-Post. It expires in 15 minutes.\n\n${magicLink}\n\nIf you didn't request this email, you can safely ignore it.`
 
   const { error } = await resend.emails.send({
     from: 'Pre-Post <hello@pre-post.com>',
     to: email,
     subject,
     html,
+    text,
   })
 
   if (error) {
@@ -83,51 +84,34 @@ export async function sendNewMessageNotification(recipientEmail: string, recipie
     return { success: true }
   }
 
+  const greeting = recipientName ? `Hi ${recipientName},` : 'Hi,'
+  const loginUrl = `${APP_URL}/login`
+
   const { error } = await resend.emails.send({
     from: 'Pre-Post <hello@pre-post.com>',
     to: recipientEmail,
-    subject: 'Someone wrote something meaningful for you',
+    subject: 'You have a new message on Pre-Post',
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Hi${recipientName ? ` ${recipientName}` : ''},</h1>
-
-        <p style="font-size: 16px; color: #444; margin-bottom: 16px;">
-          Someone who knows you has written an anonymous message just for you.
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">${greeting}</p>
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          Someone has written an anonymous message for you on Pre-Post.
         </p>
-
-        <p style="font-size: 16px; color: #444; margin-bottom: 24px;">
-          They chose to share something meaningful with you - words they may have never said out loud.
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          Pre-Post lets people say things they've never had the courage to say. The sender's identity is never revealed.
         </p>
-
-        <div style="background: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
-          <p style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 12px;">What is Pre-Post?</p>
-          <p style="font-size: 14px; color: #6b7280; margin-bottom: 8px;">
-            Pre-Post is a platform for anonymous messages. People use it to say things they've never had the courage to say - thank yous, apologies, appreciations, and words that matter.
-          </p>
-          <p style="font-size: 14px; color: #6b7280; margin-bottom: 8px;">
-            Memory walls receive more messages than personal DMs. We want to change that.
-          </p>
-          <p style="font-size: 14px; color: #6b7280;">
-            The sender's identity is never revealed. You'll never know who wrote it.
-          </p>
-        </div>
-
-        <div style="background: #fef3c7; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
-          <p style="font-size: 14px; font-weight: 600; color: #92400e; margin-bottom: 8px;">How it works</p>
-          <p style="font-size: 14px; color: #a16207;">
-            To read your message, you'll first need to "pay it forward" by writing a message to someone you care about. Once you do, you'll unlock your message.
-          </p>
-        </div>
-
-        <a href="${APP_URL}/login" style="display: inline-block; background: #2563EB; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
-          Read Your Message
-        </a>
-
-        <p style="font-size: 13px; color: #9ca3af; margin-top: 32px;">
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          To read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.
+        </p>
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          Sign in here: <a href="${loginUrl}">${loginUrl}</a>
+        </p>
+        <p style="font-size: 14px; color: #999; margin-top: 32px;">
           This is a one-time notification. If you don't want to read this message, simply ignore this email.
         </p>
       </div>
     `,
+    text: `${greeting}\n\nSomeone has written an anonymous message for you on Pre-Post.\n\nPre-Post lets people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\nSign in here: ${loginUrl}\n\nThis is a one-time notification. If you don't want to read this message, simply ignore this email.`,
   })
 
   if (error) {
@@ -147,40 +131,33 @@ export async function sendWelcomeEmail(email: string) {
     return { success: true }
   }
 
+  const writeUrl = `${APP_URL}/write`
+
   const { error } = await resend.emails.send({
     from: 'Pre-Post <hello@pre-post.com>',
     to: email,
     subject: 'Welcome to Pre-Post',
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 24px;">Welcome to Pre-Post!</h1>
-
-        <p style="font-size: 16px; color: #444; margin-bottom: 16px;">
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">Welcome to Pre-Post!</p>
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
           You're now part of a community that believes in saying things before it's too late.
         </p>
-
-        <div style="background: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
-          <p style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 12px;">How it works</p>
-          <ul style="font-size: 14px; color: #6b7280; padding-left: 20px; margin: 0;">
-            <li style="margin-bottom: 8px;">Write an anonymous message to someone who matters to you</li>
-            <li style="margin-bottom: 8px;">You earn 1 credit for each message you send</li>
-            <li style="margin-bottom: 8px;">Use credits to read messages others have sent you</li>
-          </ul>
-        </div>
-
-        <p style="font-size: 16px; color: #444; margin-bottom: 24px;">
-          <strong>Start by writing your first message.</strong> Think of someone who's made a difference in your life. Say what you've never said.
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          How it works: write an anonymous message to someone who matters to you. You earn 1 credit for each message you send. Use credits to read messages others have sent you.
         </p>
-
-        <a href="${APP_URL}/write" style="display: inline-block; background: #2563EB; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
-          Write Your First Message
-        </a>
-
-        <p style="font-size: 13px; color: #9ca3af; margin-top: 32px;">
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          Start by writing your first message. Think of someone who's made a difference in your life.
+        </p>
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          Write your first message: <a href="${writeUrl}">${writeUrl}</a>
+        </p>
+        <p style="font-size: 14px; color: #999; margin-top: 32px;">
           Say it pre, not post.
         </p>
       </div>
     `,
+    text: `Welcome to Pre-Post!\n\nYou're now part of a community that believes in saying things before it's too late.\n\nHow it works: write an anonymous message to someone who matters to you. You earn 1 credit for each message you send. Use credits to read messages others have sent you.\n\nStart by writing your first message. Think of someone who's made a difference in your life.\n\nWrite your first message: ${writeUrl}\n\nSay it pre, not post.`,
   })
 
   if (error) {
