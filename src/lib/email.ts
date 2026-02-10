@@ -122,6 +122,32 @@ export async function sendNewMessageNotification(recipientEmail: string, recipie
   return { success: true }
 }
 
+export async function sendReminderEmail(recipientEmail: string, recipientName: string) {
+  const resend = getResendClient()
+
+  if (!resend) {
+    console.log('Reminder email (no email sent):', recipientEmail)
+    return { success: true }
+  }
+
+  const greeting = recipientName ? `Hi ${recipientName},` : 'Hi,'
+  const loginUrl = `${APP_URL}/login`
+
+  const { error } = await resend.emails.send({
+    from: 'Pre-Post <hello@pre-post.com>',
+    to: recipientEmail,
+    subject: 'Reminder: Someone wrote something for you',
+    text: `${greeting}\n\nAbout a week ago, someone who knows you wrote you an anonymous message on Pre-Post. You haven't read it yet.\n\nPre-Post is a place where people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\nSign in here: ${loginUrl}\n\nIf you're not interested, no worries — we won't email you about this again.`,
+  })
+
+  if (error) {
+    console.error('Failed to send reminder email:', error)
+    return { success: false, error }
+  }
+
+  return { success: true }
+}
+
 export async function sendWelcomeEmail(email: string) {
   const resend = getResendClient()
 

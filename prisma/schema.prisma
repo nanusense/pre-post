@@ -33,6 +33,7 @@ model Message {
   createdAt       DateTime  @default(now())
   readAt          DateTime?
   deletedAt       DateTime?
+  reminderSentAt  DateTime?
 
   sender    User  @relation("SentMessages", fields: [senderId], references: [id])
   recipient User? @relation("ReceivedMessages", fields: [recipientId], references: [id])
