@@ -102,6 +102,7 @@ export default async function InboxPage({
               }
 
               const date = relativeTime ? `${relativeTime} · ${formattedDate}` : formattedDate
+              const showLock = !message.isRead && user.credits < 1
 
               return (
                 <Link
@@ -110,10 +111,12 @@ export default async function InboxPage({
                   className={`block p-4 rounded-lg transition-colors ${
                     message.isRead
                       ? 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600'
-                      : 'relative overflow-hidden bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30'
+                      : showLock
+                        ? 'relative overflow-hidden bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30'
+                        : 'bg-red-50 hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/30'
                   }`}
                 >
-                  {!message.isRead && (
+                  {showLock && (
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.06]">
                       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C9.24 2 7 4.24 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7c0-2.76-2.24-5-5-5zm-3 5c0-1.65 1.35-3 3-3s3 1.35 3 3v3H9V7zm4 10.73V19h-2v-1.27a2 2 0 1 1 2 0z" />
@@ -122,11 +125,13 @@ export default async function InboxPage({
                   )}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      {!message.isRead && (
+                      {!message.isRead && (showLock ? (
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="shrink-0">
                           <path d="M12 2C9.24 2 7 4.24 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7c0-2.76-2.24-5-5-5zm-3 5c0-1.65 1.35-3 3-3s3 1.35 3 3v3H9V7zm4 10.73V19h-2v-1.27a2 2 0 1 1 2 0z" />
                         </svg>
-                      )}
+                      ) : (
+                        <span className="w-2 h-2 bg-black dark:bg-white rounded-full"></span>
+                      ))}
                       <span className={message.isRead ? 'text-gray-600 dark:text-gray-400' : 'font-medium'}>
                         Pre-Post &darr;{messageNumber} {message.isRead ? '(read)' : '(unread)'}
                       </span>
