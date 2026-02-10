@@ -28,6 +28,8 @@ export async function GET() {
       messagesThisWeek,
       totalCredits,
       deletedMessageCount,
+      remindersSentCount,
+      pendingRemindersCount,
       recentUsers,
       recentMessages,
       pendingReports
@@ -43,6 +45,15 @@ export async function GET() {
       db.message.count({ where: { createdAt: { gte: weekAgo } } }),
       db.user.aggregate({ _sum: { credits: true } }),
       db.message.count({ where: { isDeleted: true } }),
+      db.message.count({ where: { reminderSentAt: { not: null } } }),
+      db.message.count({
+        where: {
+          isRead: false,
+          isDeleted: false,
+          reminderSentAt: null,
+          createdAt: { lte: weekAgo },
+        },
+      }),
       db.user.findMany({
         orderBy: { createdAt: 'desc' },
         take: 10,
@@ -68,6 +79,7 @@ export async function GET() {
           recipientEmail: true,
           recipientName: true,
           isRead: true,
+          reminderSentAt: true,
           createdAt: true,
           sender: {
             select: { email: true },
@@ -105,6 +117,8 @@ export async function GET() {
         messagesThisWeek,
         totalCredits: totalCredits._sum.credits || 0,
         deletedMessages: deletedMessageCount,
+        remindersSent: remindersSentCount,
+        pendingReminders: pendingRemindersCount,
       },
       recentUsers,
       recentMessages,

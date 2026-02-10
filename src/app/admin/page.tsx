@@ -21,6 +21,7 @@ interface Message {
   recipientEmail: string
   recipientName: string
   isRead: boolean
+  reminderSentAt: string | null
   createdAt: string
   sender: { email: string }
 }
@@ -57,6 +58,8 @@ interface Stats {
   messagesThisWeek: number
   totalCredits: number
   deletedMessages: number
+  remindersSent: number
+  pendingReminders: number
 }
 
 interface AdminData {
@@ -185,7 +188,7 @@ export default function AdminPage() {
           <p className="text-2xl font-semibold text-red-900 dark:text-red-300">{data.stats.suspendedUsers}</p>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-4 gap-4 mb-4">
         <div className="p-4 rounded-lg bg-teal-50 dark:bg-teal-900/20">
           <p className="text-sm text-teal-700 dark:text-teal-400">Messages This Week</p>
           <p className="text-2xl font-semibold text-teal-900 dark:text-teal-300">{data.stats.messagesThisWeek}</p>
@@ -194,6 +197,16 @@ export default function AdminPage() {
           <p className="text-sm text-yellow-700 dark:text-yellow-400">Total Credits</p>
           <p className="text-2xl font-semibold text-yellow-900 dark:text-yellow-300">{data.stats.totalCredits}</p>
         </div>
+        <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20">
+          <p className="text-sm text-purple-700 dark:text-purple-400">Reminders Sent</p>
+          <p className="text-2xl font-semibold text-purple-900 dark:text-purple-300">{data.stats.remindersSent}</p>
+        </div>
+        <div className="p-4 rounded-lg bg-orange-50 dark:bg-orange-900/20">
+          <p className="text-sm text-orange-700 dark:text-orange-400">Pending Reminders</p>
+          <p className="text-2xl font-semibold text-orange-900 dark:text-orange-300">{data.stats.pendingReminders}</p>
+        </div>
+      </div>
+      <div className="grid grid-cols-4 gap-4 mb-8">
         <div className="p-4 rounded-lg bg-gray-100 dark:bg-gray-700">
           <p className="text-sm text-gray-600 dark:text-gray-400">Deleted Messages</p>
           <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{data.stats.deletedMessages}</p>
@@ -261,7 +274,15 @@ export default function AdminPage() {
 
       {/* Recent Users */}
       <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-4">Recent Users</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold">Recent Users</h2>
+          <Link
+            href="/admin/users"
+            className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+          >
+            View all users &rarr;
+          </Link>
+        </div>
         <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-800">
@@ -352,7 +373,14 @@ export default function AdminPage() {
                     {message.isRead ? (
                       <span className="text-gray-500 dark:text-gray-400">Read</span>
                     ) : (
-                      <span className="text-black dark:text-white font-medium">Unread</span>
+                      <span className="flex items-center gap-2">
+                        <span className="text-black dark:text-white font-medium">Unread</span>
+                        {message.reminderSentAt && (
+                          <span className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-1.5 py-0.5 rounded">
+                            Reminder sent
+                          </span>
+                        )}
+                      </span>
                     )}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
