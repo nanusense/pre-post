@@ -137,7 +137,7 @@ export async function sendReminderEmail(recipientEmail: string, recipientName: s
     from: 'Pre-Post <hello@pre-post.com>',
     to: recipientEmail,
     subject: 'Reminder: Someone wrote something for you',
-    text: `${greeting}\n\nAbout a week ago, someone who knows you wrote you an anonymous message on Pre-Post. You haven't read it yet.\n\nPre-Post is a place where people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\nSign in here: ${loginUrl}\n\nIf you're not interested, no worries — we won't email you about this again.`,
+    text: `${greeting}\n\nAbout a week ago, someone who knows you wrote you an anonymous message on Pre-Post. You haven't read it yet.\n\nPre-Post is a place where people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\nSign in here: ${loginUrl}\n\nIf you want to know more about Pre-Post: ${APP_URL}/why\n\nIf you're not interested, no worries - we won't email you about this again.`,
   })
 
   if (error) {
