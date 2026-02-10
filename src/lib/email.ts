@@ -106,12 +106,15 @@ export async function sendNewMessageNotification(recipientEmail: string, recipie
         <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
           Sign in here: <a href="${loginUrl}">${loginUrl}</a>
         </p>
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
+          If you want to know more about Pre-Post: <a href="${APP_URL}/why">${APP_URL}/why</a>
+        </p>
         <p style="font-size: 14px; color: #999; margin-top: 32px;">
-          This is a one-time notification. If you don't want to read this message, simply ignore this email.
+          If you don't want to read this message, simply ignore this email.
         </p>
       </div>
     `,
-    text: `${greeting}\n\nSomeone has written an anonymous message for you on Pre-Post.\n\nPre-Post lets people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\nSign in here: ${loginUrl}\n\nThis is a one-time notification. If you don't want to read this message, simply ignore this email.`,
+    text: `${greeting}\n\nSomeone has written an anonymous message for you on Pre-Post.\n\nPre-Post lets people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\nSign in here: ${loginUrl}\n\nIf you want to know more about Pre-Post: ${APP_URL}/why\n\nIf you don't want to read this message, simply ignore this email.`,
   })
 
   if (error) {
