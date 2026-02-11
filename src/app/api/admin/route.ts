@@ -16,6 +16,7 @@ export async function GET() {
     const weekAgo = new Date()
     weekAgo.setDate(weekAgo.getDate() - 7)
 
+    // Split queries into two batches to avoid exhausting the DB connection pool
     const [
       userCount,
       messageCount,
@@ -24,6 +25,17 @@ export async function GET() {
       messagesToday,
       usersToday,
       readMessageCount,
+    ] = await Promise.all([
+      db.user.count(),
+      db.message.count(),
+      db.message.count({ where: { isRead: false } }),
+      db.report.count({ where: { status: 'pending' } }),
+      db.message.count({ where: { createdAt: { gte: today } } }),
+      db.user.count({ where: { createdAt: { gte: today } } }),
+      db.message.count({ where: { isRead: true } }),
+    ])
+
+    const [
       suspendedUserCount,
       totalCredits,
       deletedMessageCount,
@@ -33,13 +45,6 @@ export async function GET() {
       recentMessages,
       pendingReports
     ] = await Promise.all([
-      db.user.count(),
-      db.message.count(),
-      db.message.count({ where: { isRead: false } }),
-      db.report.count({ where: { status: 'pending' } }),
-      db.message.count({ where: { createdAt: { gte: today } } }),
-      db.user.count({ where: { createdAt: { gte: today } } }),
-      db.message.count({ where: { isRead: true } }),
       db.user.count({ where: { suspended: true } }),
       db.user.aggregate({ _sum: { credits: true } }),
       db.message.count({ where: { isDeleted: true } }),
