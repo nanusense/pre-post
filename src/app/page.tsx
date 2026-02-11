@@ -161,6 +161,7 @@ export default async function HomePage() {
             <nav className="flex gap-6">
               <Link href="/why" className="hover:text-gray-700 dark:hover:text-gray-300">Why</Link>
               <Link href="/how" className="hover:text-gray-700 dark:hover:text-gray-300">How to Write</Link>
+              <Link href="/privacy" className="hover:text-gray-700 dark:hover:text-gray-300">Privacy</Link>
               {!user && (
                 <Link href="/login" className="hover:text-gray-700 dark:hover:text-gray-300">Sign in</Link>
               )}
