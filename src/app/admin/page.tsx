@@ -187,7 +187,7 @@ export default function AdminPage() {
           <p className="text-2xl font-semibold text-red-900 dark:text-red-300">{data.stats.suspendedUsers}</p>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-4 mb-4">
+      <div className="grid grid-cols-4 gap-4 mb-8">
         <div className="p-4 rounded-lg bg-yellow-50 dark:bg-yellow-900/20">
           <p className="text-sm text-yellow-700 dark:text-yellow-400">Total Credits</p>
           <p className="text-2xl font-semibold text-yellow-900 dark:text-yellow-300">{data.stats.totalCredits}</p>
@@ -200,8 +200,6 @@ export default function AdminPage() {
           <p className="text-sm text-orange-700 dark:text-orange-400">Pending Reminders</p>
           <p className="text-2xl font-semibold text-orange-900 dark:text-orange-300">{data.stats.pendingReminders}</p>
         </div>
-      </div>
-      <div className="grid grid-cols-4 gap-4 mb-8">
         <div className="p-4 rounded-lg bg-gray-100 dark:bg-gray-700">
           <p className="text-sm text-gray-600 dark:text-gray-400">Deleted Messages</p>
           <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{data.stats.deletedMessages}</p>
