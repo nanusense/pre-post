@@ -55,7 +55,6 @@ interface Stats {
   usersToday: number
   readRate: number
   suspendedUsers: number
-  messagesThisWeek: number
   totalCredits: number
   deletedMessages: number
   remindersSent: number
@@ -145,7 +144,7 @@ export default function AdminPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 py-8">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Admin Dashboard</h1>
+        <h1 className="text-2xl font-semibold">Admin Snapshot</h1>
         <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
           &larr; Back to dashboard
         </Link>
@@ -189,10 +188,6 @@ export default function AdminPage() {
         </div>
       </div>
       <div className="grid grid-cols-4 gap-4 mb-4">
-        <div className="p-4 rounded-lg bg-teal-50 dark:bg-teal-900/20">
-          <p className="text-sm text-teal-700 dark:text-teal-400">Messages This Week</p>
-          <p className="text-2xl font-semibold text-teal-900 dark:text-teal-300">{data.stats.messagesThisWeek}</p>
-        </div>
         <div className="p-4 rounded-lg bg-yellow-50 dark:bg-yellow-900/20">
           <p className="text-sm text-yellow-700 dark:text-yellow-400">Total Credits</p>
           <p className="text-2xl font-semibold text-yellow-900 dark:text-yellow-300">{data.stats.totalCredits}</p>
