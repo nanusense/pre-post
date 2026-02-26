@@ -1,6 +1,6 @@
 // Common offensive words - this list can be expanded
 const BLOCKED_WORDS = [
-  'fuck', 'shit', 'ass', 'bitch', 'bastard', 'damn', 'cunt', 'dick', 'cock',
+  'fuck', 'ass', 'bitch', 'bastard', 'cunt', 'dick', 'cock',
   'pussy', 'whore', 'slut', 'fag', 'faggot', 'nigger', 'nigga', 'retard',
   'kill yourself', 'kys', 'die', 'hate you', 'go to hell',
 ]
