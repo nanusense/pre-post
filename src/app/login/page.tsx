@@ -70,7 +70,7 @@ function LoginForm() {
         )}
         <button
           onClick={() => setSent('')}
-          className="mt-6 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+          className="mt-6 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors"
         >
           Use a different email
         </button>
@@ -85,7 +85,7 @@ function LoginForm() {
         Enter your email to receive a magic link
       </p>
       <p className="text-gray-400 dark:text-gray-500 text-sm mb-6">
-        No password needed. You&apos;ll receive a secure sign-in link valid for 15 minutes. If it doesn&apos;t arrive, check your spam folder.
+        No password needed. You&apos;ll receive a secure sign-in link valid for 15 minutes. If it doesn&apos;t arrive, check your spam or promotions folder.
       </p>
 
       {(errorParam || error) && (
@@ -110,19 +110,19 @@ function LoginForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
           required
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent bg-white dark:bg-gray-800"
+          className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DDE3D5] dark:focus:ring-[#3a4a2f] focus:border-transparent bg-white dark:bg-gray-800 transition-shadow"
         />
         <button
           type="submit"
           disabled={loading}
-          className="w-full mt-4 px-4 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full mt-4 px-4 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
         >
           {loading ? 'Sending...' : 'Send Login Link'}
         </button>
       </form>
 
       <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
-        <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">
+        <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
           Back to home
         </Link>
       </p>

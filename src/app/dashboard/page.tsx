@@ -37,8 +37,8 @@ export default async function DashboardPage() {
   return (
     <>
       <Header user={{ email: user.email, credits: user.credits, isAdmin: isAdmin(user.email) }} />
-      <main className="max-w-2xl mx-auto px-4 py-8">
-        <h1 className="text-2xl font-semibold mb-4">Welcome back</h1>
+      <main className="max-w-2xl mx-auto px-6 py-10">
+        <h1 className="text-2xl font-semibold mb-6">Welcome back</h1>
 
         {/* Success message after sending */}
         <Suspense fallback={null}>
@@ -63,7 +63,7 @@ export default async function DashboardPage() {
         {/* Main action */}
         <Link
           href="/write"
-          className="block w-full p-6 bg-[#DDE3D5] dark:bg-[#3a4a2f] rounded-lg hover:bg-[#CDD3C5] dark:hover:bg-[#4a5a3f] transition-colors mb-4"
+          className="block w-full p-6 bg-[#DDE3D5] dark:bg-[#3a4a2f] rounded-lg hover:bg-[#CDD3C5] dark:hover:bg-[#4a5a3f] transition-all duration-300 mb-6 hover:shadow-lg hover:shadow-[#DDE3D5]/20 dark:hover:shadow-[#3a4a2f]/20"
         >
           <p className="text-lg font-medium text-gray-900 dark:text-gray-100">Write a Message</p>
           <p className="text-sm text-gray-800 dark:text-gray-300 mt-1">
@@ -75,7 +75,7 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-3 gap-4">
           <Link
             href="/inbox"
-            className="p-5 rounded-lg bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
+            className="p-5 rounded-lg bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-300"
           >
             <p className="text-3xl font-semibold text-red-900 dark:text-red-300">{unreadCount}</p>
             <p className="text-sm text-red-700 dark:text-red-400 mt-1">Unread</p>
@@ -83,7 +83,7 @@ export default async function DashboardPage() {
 
           <Link
             href="/inbox"
-            className="p-5 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            className="p-5 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
           >
             <p className="text-3xl font-semibold text-gray-900 dark:text-gray-100">{readCount}</p>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Read</p>
@@ -91,7 +91,7 @@ export default async function DashboardPage() {
 
           <Link
             href="/sent"
-            className="p-5 rounded-lg bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-100 dark:hover:bg-sky-900/30 transition-colors"
+            className="p-5 rounded-lg bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-100 dark:hover:bg-sky-900/30 transition-all duration-300"
           >
             <p className="text-3xl font-semibold text-sky-900 dark:text-sky-300">{sentCount}</p>
             <p className="text-sm text-sky-700 dark:text-sky-400 mt-1">Sent</p>

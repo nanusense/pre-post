@@ -14,9 +14,9 @@ export default async function WritePage() {
   return (
     <>
       <Header user={{ email: user.email, credits: user.credits, isAdmin: isAdmin(user.email) }} />
-      <main className="max-w-2xl mx-auto px-4 py-8">
+      <main className="max-w-2xl mx-auto px-6 py-10">
         <div className="mb-6">
-          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors">
             &larr; Back to dashboard
           </Link>
         </div>
@@ -30,7 +30,11 @@ export default async function WritePage() {
 
         <MessageForm />
 
-        <div className="mt-8 p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 rounded-lg">
+        <div className="relative mt-10">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent" />
+        </div>
+
+        <div className="mt-10 p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 rounded-lg">
           <h2 className="font-medium mb-2 text-red-800 dark:text-red-300">Community guidelines</h2>
           <p className="text-sm text-red-700 dark:text-red-400">
             Foul language, hate speech, and abusive messages are not allowed.
@@ -46,7 +50,7 @@ export default async function WritePage() {
             <li>Tell them something you&apos;ve never said before</li>
             <li>Write as if you might never get another chance</li>
           </ul>
-          <Link href="/how" className="text-sm text-black dark:text-gray-100 underline mt-3 inline-block">
+          <Link href="/how" className="text-sm text-black dark:text-gray-100 underline mt-3 inline-block hover:no-underline transition-colors">
             Read more writing tips &rarr;
           </Link>
         </div>

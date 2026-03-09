@@ -22,9 +22,9 @@ export default function Header({ user }: HeaderProps) {
   }
 
   return (
-    <header className="border-b border-gray-200 dark:border-gray-700">
-      <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-semibold">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80">
+      <div className="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
+        <Link href="/" className="text-lg tracking-widest uppercase font-semibold">
           Pre-Post
         </Link>
 
@@ -34,7 +34,7 @@ export default function Header({ user }: HeaderProps) {
               {user.isAdmin && (
                 <Link
                   href="/admin"
-                  className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100"
+                  className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
                   aria-label="Admin"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -52,13 +52,13 @@ export default function Header({ user }: HeaderProps) {
               </span>
               <Link
                 href="/dashboard"
-                className="text-sm text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100"
+                className="text-sm text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
               >
                 Dashboard
               </Link>
               <button
                 onClick={handleLogout}
-                className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100"
+                className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
                 aria-label="Sign out"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
@@ -71,7 +71,7 @@ export default function Header({ user }: HeaderProps) {
           ) : (
             <Link
               href="/login"
-              className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100"
+              className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
               aria-label="Sign in"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
