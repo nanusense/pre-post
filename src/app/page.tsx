@@ -10,7 +10,7 @@ export default async function HomePage() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80">
         <div className="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="text-lg tracking-widest uppercase font-semibold">Pre-Post</span>
+          <span className="text-lg font-semibold">Pre-Post</span>
           <nav className="flex items-center gap-4">
             {user ? (
               <Link href="/dashboard" className="text-sm text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100 transition-colors">

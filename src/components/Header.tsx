@@ -24,7 +24,7 @@ export default function Header({ user }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80">
       <div className="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="text-lg tracking-widest uppercase font-semibold">
+        <Link href="/" className="text-lg font-semibold">
           Pre-Post
         </Link>
 
@@ -54,7 +54,7 @@ export default function Header({ user }: HeaderProps) {
                 href="/dashboard"
                 className="text-sm text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
               >
-                Dashboard
+                Dash
               </Link>
               <button
                 onClick={handleLogout}
