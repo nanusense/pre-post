@@ -122,9 +122,9 @@ export default function MessagePage() {
 
   if (needsCredits) {
     return (
-      <main className="max-w-2xl mx-auto px-4 py-8">
+      <main className="max-w-2xl mx-auto px-6 py-10">
         <div className="mb-6">
-          <Link href="/inbox" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+          <Link href="/inbox" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors">
             &larr; Back to inbox
           </Link>
         </div>
@@ -139,7 +139,7 @@ export default function MessagePage() {
           </p>
           <Link
             href="/write"
-            className="inline-block px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-200"
+            className="inline-block px-7 py-3 bg-[#DDE3D5] dark:bg-[#3a4a2f] text-gray-900 dark:text-gray-100 rounded-full font-medium hover:bg-[#CDD3C5] dark:hover:bg-[#4a5a3f] hover:shadow-lg hover:shadow-[#DDE3D5]/30 dark:hover:shadow-[#3a4a2f]/30 transition-all duration-300"
           >
             Write a Message
           </Link>
@@ -150,9 +150,9 @@ export default function MessagePage() {
 
   if (error) {
     return (
-      <main className="max-w-2xl mx-auto px-4 py-8">
+      <main className="max-w-2xl mx-auto px-6 py-10">
         <div className="mb-6">
-          <Link href="/inbox" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+          <Link href="/inbox" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors">
             &larr; Back to inbox
           </Link>
         </div>
@@ -180,15 +180,16 @@ export default function MessagePage() {
   })
 
   return (
-    <main className="max-w-2xl mx-auto px-4 py-8">
+    <main className="max-w-2xl mx-auto px-6 py-10">
       <div className="mb-6">
-        <Link href={isSender ? '/sent' : '/inbox'} className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+        <Link href={isSender ? '/sent' : '/inbox'} className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors">
           &larr; {isSender ? 'Back to sent' : 'Back to inbox'}
         </Link>
       </div>
 
       <article className="prose prose-gray dark:prose-invert max-w-none">
-        <header className="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+        <header className="relative mb-8 pb-6">
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent" />
           <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">
             {isSender ? (
               <>To: <span className="font-medium text-gray-900 dark:text-gray-100">{message.recipientName}</span></>
@@ -205,7 +206,8 @@ export default function MessagePage() {
       </article>
 
       {!isSender && (
-        <footer className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <footer className="relative mt-12 pt-6">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent" />
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
             This message was written anonymously. You will never know who sent it.
           </p>
@@ -214,14 +216,14 @@ export default function MessagePage() {
             <button
               onClick={() => setShowReportModal(true)}
               disabled={reported}
-              className="text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 disabled:text-gray-400 dark:disabled:text-gray-600"
+              className="text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 disabled:text-gray-400 dark:disabled:text-gray-600 transition-colors"
             >
               {reported ? 'Reported' : 'Report abuse'}
             </button>
             <button
               onClick={handleDelete}
               disabled={deleting}
-              className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 disabled:opacity-50"
+              className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 disabled:opacity-50 transition-colors"
             >
               {deleting ? 'Deleting...' : 'Delete message'}
             </button>
@@ -229,7 +231,7 @@ export default function MessagePage() {
 
           <Link
             href="/write"
-            className="inline-block text-sm text-black dark:text-gray-100 underline hover:no-underline"
+            className="inline-block text-sm text-black dark:text-gray-100 underline hover:no-underline transition-colors"
           >
             Pay it forward - write a message to someone you care about
           </Link>
@@ -249,19 +251,19 @@ export default function MessagePage() {
               onChange={(e) => setReportReason(e.target.value)}
               placeholder="Reason for reporting..."
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent resize-none mb-4 bg-white dark:bg-gray-900"
+              className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DDE3D5] dark:focus:ring-[#3a4a2f] focus:border-transparent resize-none mb-4 bg-white dark:bg-gray-900 transition-shadow"
             />
             <div className="flex gap-3">
               <button
                 onClick={handleReport}
                 disabled={reporting || !reportReason.trim()}
-                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50"
+                className="flex-1 px-4 py-2.5 bg-red-600 text-white rounded-full font-medium hover:bg-red-700 disabled:opacity-50 transition-all duration-300"
               >
                 {reporting ? 'Submitting...' : 'Submit Report'}
               </button>
               <button
                 onClick={() => setShowReportModal(false)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+                className="px-4 py-2.5 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300"
               >
                 Cancel
               </button>

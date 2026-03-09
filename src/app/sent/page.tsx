@@ -39,9 +39,9 @@ export default async function SentPage({
   return (
     <>
       <Header user={{ email: user.email, credits: user.credits, isAdmin: isAdmin(user.email) }} />
-      <main className="max-w-2xl mx-auto px-4 py-8">
+      <main className="max-w-2xl mx-auto px-6 py-10">
         <div className="mb-6">
-          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+          <Link href="/dashboard" className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors">
             &larr; Back
           </Link>
         </div>
@@ -49,11 +49,11 @@ export default async function SentPage({
         <h1 className="text-2xl font-semibold mb-6">Sent Messages</h1>
 
         {totalCount === 0 ? (
-          <div className="text-center py-8">
+          <div className="text-center py-12">
             <p className="text-gray-500 dark:text-gray-400 mb-4">You haven&apos;t sent any messages yet</p>
             <Link
               href="/write"
-              className="inline-block px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200"
+              className="inline-block px-6 py-2.5 bg-[#DDE3D5] dark:bg-[#3a4a2f] text-gray-900 dark:text-gray-100 rounded-full font-medium hover:bg-[#CDD3C5] dark:hover:bg-[#4a5a3f] hover:shadow-lg hover:shadow-[#DDE3D5]/30 dark:hover:shadow-[#3a4a2f]/30 transition-all duration-300"
             >
               Write your first message
             </Link>
@@ -92,7 +92,7 @@ export default async function SentPage({
                 <Link
                   key={message.id}
                   href={`/message/${message.id}`}
-                  className="block p-4 rounded-lg bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-100 dark:hover:bg-sky-900/30 transition-colors"
+                  className="block p-4 rounded-lg bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-100 dark:hover:bg-sky-900/30 transition-all duration-300"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-medium">PP &uarr;{messageNumber}</span>

@@ -78,7 +78,7 @@ export default function MessageForm() {
           onChange={(e) => setRecipientName(e.target.value)}
           placeholder="The person on your mind"
           required
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent bg-white dark:bg-gray-800"
+          className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DDE3D5] dark:focus:ring-[#3a4a2f] focus:border-transparent bg-white dark:bg-gray-800 transition-shadow"
         />
       </div>
 
@@ -93,7 +93,7 @@ export default function MessageForm() {
           onChange={(e) => setRecipientEmail(e.target.value)}
           placeholder="they@example.com"
           required
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent bg-white dark:bg-gray-800"
+          className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DDE3D5] dark:focus:ring-[#3a4a2f] focus:border-transparent bg-white dark:bg-gray-800 transition-shadow"
         />
       </div>
 
@@ -108,7 +108,7 @@ export default function MessageForm() {
           placeholder="Say what you've always meant to..."
           required
           rows={8}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent resize-none bg-white dark:bg-gray-800"
+          className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#DDE3D5] dark:focus:ring-[#3a4a2f] focus:border-transparent resize-none bg-white dark:bg-gray-800 transition-shadow"
         />
         <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           This message is permanent and anonymous. They will never know it&apos;s from you. Not even admins can read it.
@@ -119,7 +119,7 @@ export default function MessageForm() {
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-2 bg-[#DDE3D5] dark:bg-[#3a4a2f] text-gray-900 dark:text-gray-100 rounded-lg font-medium hover:bg-[#CDD3C5] dark:hover:bg-[#4a5a3f] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-7 py-3 bg-[#DDE3D5] dark:bg-[#3a4a2f] text-gray-900 dark:text-gray-100 rounded-full font-medium hover:bg-[#CDD3C5] dark:hover:bg-[#4a5a3f] hover:shadow-lg hover:shadow-[#DDE3D5]/30 dark:hover:shadow-[#3a4a2f]/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
         >
           {loading ? 'Sending...' : 'Send Message'}
         </button>

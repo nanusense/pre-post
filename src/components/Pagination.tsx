@@ -24,16 +24,16 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
   }
 
   return (
-    <nav className="flex items-center justify-center gap-1 mt-8" aria-label="Pagination">
+    <nav className="flex items-center justify-center gap-1 mt-10" aria-label="Pagination">
       {currentPage > 1 ? (
         <Link
           href={pageHref(currentPage - 1)}
-          className="px-3 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
+          className="px-3 py-2 text-sm rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
         >
           Previous
         </Link>
       ) : (
-        <span className="px-3 py-2 text-sm rounded-lg text-gray-300 dark:text-gray-600">Previous</span>
+        <span className="px-3 py-2 text-sm rounded-full text-gray-300 dark:text-gray-600">Previous</span>
       )}
 
       {pages.map((page, idx) =>
@@ -44,7 +44,7 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
         ) : page === currentPage ? (
           <span
             key={page}
-            className="px-3 py-2 text-sm rounded-lg bg-black dark:bg-white text-white dark:text-black"
+            className="px-3 py-2 text-sm rounded-full bg-black dark:bg-white text-white dark:text-black"
           >
             {page}
           </span>
@@ -52,7 +52,7 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
           <Link
             key={page}
             href={pageHref(page)}
-            className="px-3 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
+            className="px-3 py-2 text-sm rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
           >
             {page}
           </Link>
@@ -62,12 +62,12 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
       {currentPage < totalPages ? (
         <Link
           href={pageHref(currentPage + 1)}
-          className="px-3 py-2 text-sm rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
+          className="px-3 py-2 text-sm rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
         >
           Next
         </Link>
       ) : (
-        <span className="px-3 py-2 text-sm rounded-lg text-gray-300 dark:text-gray-600">Next</span>
+        <span className="px-3 py-2 text-sm rounded-full text-gray-300 dark:text-gray-600">Next</span>
       )}
     </nav>
   )

@@ -56,13 +56,13 @@ export default function OnboardingModal() {
         <div className="flex gap-3">
           <button
             onClick={() => setShow(false)}
-            className="flex-1 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            className="flex-1 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-all duration-300"
           >
             Maybe later
           </button>
           <Link
             href="/write"
-            className="flex-1 px-4 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-medium text-center hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+            className="flex-1 px-4 py-3 bg-[#DDE3D5] dark:bg-[#3a4a2f] text-gray-900 dark:text-gray-100 rounded-full font-medium text-center hover:bg-[#CDD3C5] dark:hover:bg-[#4a5a3f] hover:shadow-lg hover:shadow-[#DDE3D5]/30 dark:hover:shadow-[#3a4a2f]/30 transition-all duration-300"
           >
             Write my first message
           </Link>
