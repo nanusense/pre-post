@@ -189,9 +189,7 @@ export default async function HomePage() {
               <Link href="/why" className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Why</Link>
               <Link href="/how" className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">How to Write</Link>
               <Link href="/privacy" className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Privacy</Link>
-              {!user && (
-                <Link href="/login" className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Sign in</Link>
-              )}
+              <a href="https://razorpay.me/@sandeepnanu" target="_blank" rel="noopener noreferrer" className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">Buy me a Beer</a>
             </nav>
           </div>
         </div>
