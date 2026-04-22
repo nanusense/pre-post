@@ -19,17 +19,10 @@ export async function sendMagicLinkEmail(email: string, token: string, isNewUser
     return { success: true, magicLink }
   }
 
-  const subject = isNewUser
-    ? 'Welcome to Pre-Post – sign in to get started'
-    : 'Your login link for Pre-Post'
-
   const html = isNewUser
     ? `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">Welcome to Pre-Post!</p>
-        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
-          Pre-Post is a place for anonymous, meaningful messages. People use it to say things they've never had the courage to say.
-        </p>
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">Pre-Post is a place where people say things they've never had the courage to say. The sender's identity is never revealed.</p>
         <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
           Someone may have already written something for you. To read it, you'll first need to pay it forward by writing a message to someone you care about.
         </p>
@@ -56,13 +49,14 @@ export async function sendMagicLinkEmail(email: string, token: string, isNewUser
     `
 
   const text = isNewUser
-    ? `Welcome to Pre-Post!\n\nPre-Post is a place for anonymous, meaningful messages. People use it to say things they've never had the courage to say.\n\nSomeone may have already written something for you. To read it, you'll first need to pay it forward by writing a message to someone you care about.\n\nSign in here (link expires in 15 minutes): ${magicLink}\n\nIf you didn't request this email, you can safely ignore it.`
+    ? `Pre-Post is a place where people say things they've never had the courage to say. The sender's identity is never revealed.\n\nSomeone may have already written something for you. To read it, you'll first need to pay it forward by writing a message to someone you care about.\n\nSign in here (link expires in 15 minutes): ${magicLink}\n\nIf you didn't request this email, you can safely ignore it.`
     : `Here's your sign-in link for Pre-Post. It expires in 15 minutes.\n\n${magicLink}\n\nIf you didn't request this email, you can safely ignore it.`
 
   const { error } = await resend.emails.send({
     from: 'Pre-Post <hello@pre-post.com>',
+    replyTo: 'hello@pre-post.com',
     to: email,
-    subject,
+    subject: 'Your sign-in link',
     html,
     text,
   })
@@ -89,32 +83,27 @@ export async function sendNewMessageNotification(recipientEmail: string, recipie
 
   const { error } = await resend.emails.send({
     from: 'Pre-Post <hello@pre-post.com>',
+    replyTo: 'hello@pre-post.com',
     to: recipientEmail,
-    subject: 'You have a new message on Pre-Post',
+    subject: 'Someone wrote you a message',
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
         <p style="font-size: 16px; color: #333; margin-bottom: 16px;">${greeting}</p>
         <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
-          Someone has written an anonymous message for you on Pre-Post.
-        </p>
-        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
-          Pre-Post lets people say things they've never had the courage to say. The sender's identity is never revealed.
+          Someone has written an anonymous message for you. Pre-Post is a place where people say things they've never had the courage to say. The sender's identity is never revealed.
         </p>
         <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
           To read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.
         </p>
         <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
-          Sign in here: <a href="${loginUrl}">${loginUrl}</a>
-        </p>
-        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
-          If you want to know more about Pre-Post: <a href="${APP_URL}/why">${APP_URL}/why</a>
+          <a href="${loginUrl}">Sign in to read it</a>
         </p>
         <p style="font-size: 14px; color: #999; margin-top: 32px;">
           If you don't want to read this message, simply ignore this email.
         </p>
       </div>
     `,
-    text: `${greeting}\n\nSomeone has written an anonymous message for you on Pre-Post.\n\nPre-Post lets people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\nSign in here: ${loginUrl}\n\nIf you want to know more about Pre-Post: ${APP_URL}/why\n\nIf you don't want to read this message, simply ignore this email.`,
+    text: `${greeting}\n\nSomeone has written an anonymous message for you. Pre-Post is a place where people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\n${loginUrl}\n\nIf you don't want to read this message, simply ignore this email.`,
   })
 
   if (error) {
@@ -138,9 +127,10 @@ export async function sendReminderEmail(recipientEmail: string, recipientName: s
 
   const { error } = await resend.emails.send({
     from: 'Pre-Post <hello@pre-post.com>',
+    replyTo: 'hello@pre-post.com',
     to: recipientEmail,
-    subject: 'Reminder: Someone wrote something for you',
-    text: `${greeting}\n\nAbout a week ago, someone who knows you wrote you an anonymous message on Pre-Post. You haven't read it yet.\n\nPre-Post is a place where people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\nSign in here: ${loginUrl}\n\nIf you want to know more about Pre-Post: ${APP_URL}/why\n\nIf you're not interested, no worries - we won't email you about this again.`,
+    subject: 'Someone wrote something for you',
+    text: `${greeting}\n\nAbout a week ago, someone who knows you wrote you an anonymous message on Pre-Post. You haven't read it yet.\n\nPre-Post is a place where people say things they've never had the courage to say. The sender's identity is never revealed.\n\nTo read your message, sign in and write a message to someone you care about first. Then your message will be unlocked.\n\n${loginUrl}\n\nIf you're not interested, no worries - we won't email you about this again.`,
   })
 
   if (error) {
@@ -164,29 +154,24 @@ export async function sendWelcomeEmail(email: string) {
 
   const { error } = await resend.emails.send({
     from: 'Pre-Post <hello@pre-post.com>',
+    replyTo: 'hello@pre-post.com',
     to: email,
-    subject: 'Welcome to Pre-Post',
+    subject: "You're in",
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">Welcome to Pre-Post!</p>
+        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">You're now part of a community that believes in saying things before it's too late.</p>
         <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
-          You're now part of a community that believes in saying things before it's too late.
+          Write an anonymous message to someone who matters to you. You earn 1 credit for each message you send. Use credits to read messages others have sent you.
         </p>
         <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
-          How it works: write an anonymous message to someone who matters to you. You earn 1 credit for each message you send. Use credits to read messages others have sent you.
-        </p>
-        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
-          Start by writing your first message. Think of someone who's made a difference in your life.
-        </p>
-        <p style="font-size: 16px; color: #333; margin-bottom: 16px;">
-          Write your first message: <a href="${writeUrl}">${writeUrl}</a>
+          Think of someone who's made a difference in your life. <a href="${writeUrl}">Write them a message.</a>
         </p>
         <p style="font-size: 14px; color: #999; margin-top: 32px;">
           Say it pre, not post.
         </p>
       </div>
     `,
-    text: `Welcome to Pre-Post!\n\nYou're now part of a community that believes in saying things before it's too late.\n\nHow it works: write an anonymous message to someone who matters to you. You earn 1 credit for each message you send. Use credits to read messages others have sent you.\n\nStart by writing your first message. Think of someone who's made a difference in your life.\n\nWrite your first message: ${writeUrl}\n\nSay it pre, not post.`,
+    text: `You're now part of a community that believes in saying things before it's too late.\n\nWrite an anonymous message to someone who matters to you. You earn 1 credit for each message you send. Use credits to read messages others have sent you.\n\nThink of someone who's made a difference in your life.\n\n${writeUrl}\n\nSay it pre, not post.`,
   })
 
   if (error) {
